@@ -13,6 +13,7 @@ import {
 
 import Button from "@/components/ui/Button";
 import Icon from "@/components/ui/Icon";
+import { useColors, useDarkMode } from "@/theme/hooks";
 
 interface HeaderProps {
   user: { id: string; email: string; name: string } | null;
@@ -20,14 +21,24 @@ interface HeaderProps {
 }
 
 export default function Header({ user, onLogout }: HeaderProps) {
-  const router = useRouter(); // ĐÃ SỬA: useRouter()
+  const router = useRouter();
+  const colors = useColors();
+  const isDark = useDarkMode();
+  const headerBg = isDark ? colors.neutral[900] : "#ffffff";
+  const headerBorder = isDark ? colors.neutral[800] : colors.neutral[200];
+  const logoBg = isDark ? colors.primary[600] : colors.primary[500];
+  const titleColor = isDark ? colors.neutral[50] : colors.neutral[900];
+  const userTextColor = isDark ? colors.neutral[200] : colors.neutral[700];
 
   const handleNavigate = (path: string) => {
     router.push(path);
   };
 
   return (
-    <header className="border-b border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-950 shadow-sm sticky top-0 z-40">
+    <header
+      className="border-b shadow-sm sticky top-0 z-40"
+      style={{ backgroundColor: headerBg, borderBottomColor: headerBorder }}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex items-center justify-between">
         {/* Logo */}
         <div
@@ -37,10 +48,10 @@ export default function Header({ user, onLogout }: HeaderProps) {
           tabIndex={0}
           onKeyDown={(e) => e.key === "Enter" && handleNavigate("/")}
         >
-          <div className="bg-blue-600 dark:bg-blue-500 p-2 rounded-lg">
+          <div className="p-2 rounded-lg" style={{ backgroundColor: logoBg }}>
             <Icon icon={BookOpen} size="md" className="text-white" />
           </div>
-          <h1 className="text-2xl font-bold text-slate-900 dark:text-white">
+          <h1 className="text-2xl font-bold" style={{ color: titleColor }}>
             EduLearn
           </h1>
         </div>
@@ -49,7 +60,10 @@ export default function Header({ user, onLogout }: HeaderProps) {
         <nav className="flex gap-3 items-center">
           {user ? (
             <>
-              <div className="hidden sm:flex items-center gap-2 text-sm text-slate-700 dark:text-slate-300">
+              <div
+                className="hidden sm:flex items-center gap-2 text-sm"
+                style={{ color: userTextColor }}
+              >
                 <Icon icon={User} size="sm" />
                 <span className="truncate max-w-32">
                   {user.name || user.email}

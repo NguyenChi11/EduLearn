@@ -36,7 +36,6 @@ export default function CourseCard({
   level,
   kindOfCourse,
   thumbnail,
-  coverImage,
   progress = 0,
   rating = 0,
   enrolledCount = 0,

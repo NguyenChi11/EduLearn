@@ -72,7 +72,7 @@ export default function SearchFilter({
     <div className="space-y-4">
       <div className="relative">
         <Search
-          className="absolute left-3 top-3 w-5 h-5 text-slate-500 dark:text-slate-400 flex-shrink-0"
+          className="absolute left-3 top-3 w-5 h-5 text-slate-500 dark:text-slate-400 shrink-0"
           aria-hidden="true"
         />
         <input

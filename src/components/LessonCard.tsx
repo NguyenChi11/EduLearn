@@ -35,7 +35,7 @@ export default function LessonCard({
               </span>
               {isCompleted && (
                 <CheckCircle
-                  className="w-5 h-5 text-green-500 flex-shrink-0"
+                  className="w-5 h-5 text-green-500 shrink-0"
                   aria-label="Lesson completed"
                 />
               )}
@@ -51,10 +51,10 @@ export default function LessonCard({
       <div className="p-6 pt-0 space-y-4">
         <div className="flex items-center justify-between text-sm text-slate-600 dark:text-slate-400">
           <div className="flex items-center gap-2">
-            <Video className="w-4 h-4 flex-shrink-0" aria-hidden="true" />
+            <Video className="w-4 h-4 shrink-0" aria-hidden="true" />
             <span>Video bài học</span>
             <span aria-hidden="true">•</span>
-            <Clock className="w-4 h-4 flex-shrink-0" aria-hidden="true" />
+            <Clock className="w-4 h-4 shrink-0" aria-hidden="true" />
             <span>{duration} phút</span>
           </div>
         </div>

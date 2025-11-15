@@ -17,8 +17,6 @@ export default function CourseSearchSection({
   levels,
   onSearch,
   onFilter,
-  searchQuery,
-  filterOptions,
   coursesFound,
   totalCourses,
 }: CourseSearchSectionProps) {

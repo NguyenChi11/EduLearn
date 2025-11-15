@@ -33,7 +33,7 @@ export default function CoursesPage() {
     }
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setUser(storedUser);
-  }, []);
+  }, [router]);
 
   const categories = useMemo(
     () => [...new Set(MOCK_COURSES.map((c) => c.kindOfCourse).filter(Boolean))],
