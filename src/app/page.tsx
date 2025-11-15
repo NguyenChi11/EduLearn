@@ -7,5 +7,5 @@ export default function HomePage() {
     redirect("/login");
   }
 
-  return <div></div>;
+  return <div>abc</div>;
 }

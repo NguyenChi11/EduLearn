@@ -81,7 +81,7 @@ export default function LoginPage() {
               onClick={handleForgotPassword}
               className="text-sm text-blue-600 hover:underline"
             >
-              Quên mật khẩu?
+              Quên mật khẩuu?
             </button>
           </div>
 
