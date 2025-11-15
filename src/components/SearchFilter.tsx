@@ -3,6 +3,11 @@
 import { useState, useCallback } from "react";
 import { Search, X } from "lucide-react";
 
+import Button from "@/components/ui/Button";
+import Input from "@/components/ui/Input";
+import Label from "@/components/ui/Label";
+import Card from "@/components/ui/Card";
+
 export interface FilterOptions {
   category?: string;
   level?: "S" | "Pres" | "TC" | "MTC";
@@ -39,8 +44,7 @@ export default function SearchFilter({
       setSelectedCategory(value);
       onFilter({
         category: value || undefined,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        level: (selectedLevel as any) || undefined,
+        level: (selectedLevel as FilterOptions["level"]) || undefined,
       });
     },
     [selectedLevel, onFilter]
@@ -51,8 +55,7 @@ export default function SearchFilter({
       setSelectedLevel(value);
       onFilter({
         category: selectedCategory || undefined,
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
-        level: (value as any) || undefined,
+        level: (value as FilterOptions["level"]) || undefined,
       });
     },
     [selectedCategory, onFilter]
@@ -72,91 +75,84 @@ export default function SearchFilter({
     <div className="space-y-4">
       <div className="relative">
         <Search
-          className="absolute left-3 top-3 w-5 h-5 text-slate-500 dark:text-slate-400 shrink-0"
+          className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-slate-500 dark:text-slate-400 shrink-0"
           aria-hidden="true"
         />
-        <input
-          type="text"
+        <Input
           placeholder="Tìm kiếm khóa học..."
           value={query}
           onChange={(e) => handleSearch(e.target.value)}
           aria-label="Search courses"
-          className="flex h-10 w-full rounded-md border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 pl-10 pr-3 py-2 text-base text-slate-900 dark:text-white placeholder:text-slate-500 dark:placeholder:text-slate-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
+          className="pl-10"
         />
       </div>
 
       {/* Filter Toggle */}
       <div className="flex flex-wrap gap-2">
-        <button
+        <Button
+          variant="secondary"
           onClick={() => setShowFilters(!showFilters)}
-          className="px-4 py-2 border border-slate-300 dark:border-slate-700 text-slate-700 dark:text-slate-300 rounded-lg hover:bg-slate-50 dark:hover:bg-slate-900 transition-colors text-sm font-medium"
+          className="h-10 px-4"
           aria-expanded={showFilters}
           aria-controls="filter-panel"
         >
           {showFilters ? "Ẩn bộ lọc" : "Hiển thị bộ lọc"}
-        </button>
+        </Button>
 
         {hasActiveFilters && (
-          <button
+          <Button
+            variant="secondary"
             onClick={clearFilters}
-            className="inline-flex items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900 border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-slate-700 dark:text-slate-300 hover:bg-slate-50 dark:hover:bg-slate-900 h-10 px-3"
+            className="h-10 px-3 flex items-center gap-1"
           >
-            <X className="w-4 h-4 mr-1" aria-hidden="true" />
-            Xóa bộ lọc
-          </button>
+            <X className="w-4 h-4" aria-hidden="true" />
+            <span>Xóa bộ lọc</span>
+          </Button>
         )}
       </div>
 
       {/* Filter Options */}
       {showFilters && (
-        <div
-          id="filter-panel"
-          className="grid md:grid-cols-2 gap-4 p-4 bg-slate-50 dark:bg-slate-900 rounded-lg"
-        >
-          <div>
-            <label
-              htmlFor="category-select"
-              className="block text-sm font-medium mb-2"
-            >
-              Danh mục
-            </label>
-            <select
-              id="category-select"
-              value={selectedCategory}
-              onChange={(e) => handleCategoryChange(e.target.value)}
-              className="flex h-10 w-full rounded-md border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2 text-base text-slate-900 dark:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
-            >
-              <option value="">Tất cả danh mục</option>
-              {categories.map((cat) => (
-                <option key={cat} value={cat}>
-                  {cat}
-                </option>
-              ))}
-            </select>
-          </div>
+        <Card>
+          <div
+            id="filter-panel"
+            className="grid md:grid-cols-2 gap-4"
+          >
+            <div>
+              <Label htmlFor="category-select">Danh mục</Label>
+              <select
+                id="category-select"
+                value={selectedCategory}
+                onChange={(e) => handleCategoryChange(e.target.value)}
+                className="flex h-10 w-full rounded-md border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2 text-base text-slate-900 dark:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
+              >
+                <option value="">Tất cả danh mục</option>
+                {categories.map((cat) => (
+                  <option key={cat} value={cat}>
+                    {cat}
+                  </option>
+                ))}
+              </select>
+            </div>
 
-          <div>
-            <label
-              htmlFor="level-select"
-              className="block text-sm font-medium mb-2"
-            >
-              Mức độ
-            </label>
-            <select
-              id="level-select"
-              value={selectedLevel}
-              onChange={(e) => handleLevelChange(e.target.value)}
-              className="flex h-10 w-full rounded-md border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2 text-base text-slate-900 dark:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
-            >
-              <option value="">Tất cả mức độ</option>
-              {levels.map((level) => (
-                <option key={level} value={level}>
-                  {level}
-                </option>
-              ))}
-            </select>
+            <div>
+              <Label htmlFor="level-select">Mức độ</Label>
+              <select
+                id="level-select"
+                value={selectedLevel}
+                onChange={(e) => handleLevelChange(e.target.value)}
+                className="flex h-10 w-full rounded-md border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 px-3 py-2 text-base text-slate-900 dark:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900 disabled:cursor-not-allowed disabled:opacity-50 md:text-sm"
+              >
+                <option value="">Tất cả mức độ</option>
+                {levels.map((level) => (
+                  <option key={level} value={level}>
+                    {level}
+                  </option>
+                ))}
+              </select>
+            </div>
           </div>
-        </div>
+        </Card>
       )}
     </div>
   );

@@ -83,7 +83,7 @@ export default function CoursesPage() {
   if (!user) return null;
 
   return (
-    <div className="p-4 md:p-8">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 p-4 md:p-8">
       <CourseSearchSection
         categories={categories}
         levels={[...levels]}

@@ -3,6 +3,7 @@ import { BookOpen } from "lucide-react";
 import Card from "@/components/ui/Card";
 import Icon from "@/components/ui/Icon";
 import Typography from "@/components/ui/Typography";
+import { useColors, useDarkMode } from "@/theme/hooks";
 
 const features = [
   {
@@ -23,6 +24,10 @@ const features = [
 ];
 
 export default function Features() {
+  const colors = useColors();
+  const isDark = useDarkMode();
+  const iconColor = isDark ? colors.primary[400] : colors.primary[600];
+
   return (
     <div className="grid md:grid-cols-3 gap-6">
       {features.map((f, i) => (
@@ -34,7 +39,8 @@ export default function Features() {
             <Icon
               icon={f.icon}
               size="md"
-              className="text-blue-600 dark:text-blue-400"
+              className=""
+              style={{ color: iconColor }}
             />
             {f.title}
           </Typography>

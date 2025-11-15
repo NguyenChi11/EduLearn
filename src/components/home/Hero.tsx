@@ -13,7 +13,7 @@ export default function Hero({ isLoggedIn }: HeroProps) {
 
   return (
     <div className="text-center mb-16">
-      <Typography variant="h1" className="mb-4">
+      <Typography variant="h1" className="mb-4 text-white">
         Nền tảng học tập hiện đại
       </Typography>
       <Typography variant="p" className="mb-8 text-xl">
