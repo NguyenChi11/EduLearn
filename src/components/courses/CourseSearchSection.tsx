@@ -34,7 +34,7 @@ export default function CourseSearchSection({
         onSearch={onSearch}
         onFilter={onFilter}
         categories={categories}
-        levels={levels}
+        levels={levels as readonly ("S" | "Pres" | "TC" | "MTC")[]}
       />
       <p className="text-sm text-slate-600 dark:text-slate-400 mt-6">
         Tìm thấy {coursesFound} khóa học
