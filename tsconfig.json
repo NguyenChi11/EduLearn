@@ -1,5 +1,6 @@
 {
   "compilerOptions": {
+    // "ignoreDeprecations": "6.0",
     "target": "ES2017",
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -18,8 +19,18 @@
         "name": "next"
       }
     ],
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./*"]
+      "@/*": ["./src/*"],
+      "@/components/*": ["./src/components/*"],
+      "@/lib/*": ["./src/lib/*"],
+      "@/utils/*": ["./src/utils/*"],
+      "@/types/*": ["./src/types/*"],
+      "@/constants/*": ["./src/constants/*"],
+      "@/hooks/*": ["./src/hooks/*"],
+      "@/fetches/*": ["./src/fetches/*"],
+      "@/actions/*": ["./src/actions/*"],
+      "@/schemas/*": ["./src/schemas/*"]
     }
   },
   "include": [
