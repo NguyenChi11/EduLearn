@@ -7,11 +7,24 @@ import { ThemeExamples } from "@/components/ThemeExamples";
  */
 
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+
+import Header from "@/components/layout/Header";
+import { useStoredUser } from "@/hooks/useStoredUser";
 
 export default function ThemePage() {
+  const router = useRouter();
+  const { user, logout } = useStoredUser();
+
+  const handleLogout = () => {
+    logout();
+    router.push("/");
+  };
+
   return (
-    <main className="min-h-screen bg-white dark:bg-slate-950">
-      <div className="max-w-7xl mx-auto">
+    <div className="min-h-screen bg-white dark:bg-slate-950">
+      <Header user={user} onLogout={handleLogout} />
+      <main className="max-w-7xl mx-auto">
         {/* Header */}
         <header className="border-b border-slate-200 dark:border-slate-800 py-6 px-6 md:px-8">
           <div className="flex items-center justify-between mb-2">
@@ -41,7 +54,7 @@ export default function ThemePage() {
             Theme System • Tailwind CSS + Custom Design Tokens
           </p>
         </footer>
-      </div>
-    </main>
+      </main>
+    </div>
   );
 }

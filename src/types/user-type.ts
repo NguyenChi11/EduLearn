@@ -2,6 +2,14 @@ export interface User {
   id: string;
   email: string;
   name: string;
+  avatar?: string;
+  headline?: string;
+  bio?: string;
+  language?: string;
+  website?: string;
+  facebook?: string;
+  linkedin?: string;
+  youtube?: string;
 }
 
 export interface AuthFormData {

@@ -16,6 +16,35 @@ export const validatePassword = (password: string): boolean => {
   return password.length >= 6;
 };
 
+export const validatePasswordStrength = (password: string): { isValid: boolean; errors: string[] } => {
+  const errors: string[] = [];
+
+  if (password.length < 8) {
+    errors.push("Mật khẩu phải có ít nhất 8 ký tự");
+  }
+
+  if (!/[A-Z]/.test(password)) {
+    errors.push("Mật khẩu phải chứa ít nhất 1 chữ cái viết hoa");
+  }
+
+  if (!/[a-z]/.test(password)) {
+    errors.push("Mật khẩu phải chứa ít nhất 1 chữ cái viết thường");
+  }
+
+  if (!/\d/.test(password)) {
+    errors.push("Mật khẩu phải chứa ít nhất 1 chữ số");
+  }
+
+  if (!/[!@#$%^&*(),.?":{}|<>]/.test(password)) {
+    errors.push("Mật khẩu phải chứa ít nhất 1 ký tự đặc biệt");
+  }
+
+  return {
+    isValid: errors.length === 0,
+    errors
+  };
+};
+
 export const validateLoginForm = (
   email: string,
   password: string
@@ -34,6 +63,49 @@ export const validateLoginForm = (
     errors.password = "Mật khẩu không được để trống";
   } else if (!validatePassword(password)) {
     errors.password = "Mật khẩu phải có ít nhất 6 ký tự";
+  }
+
+  return errors;
+};
+
+export interface PasswordChangeData {
+  currentPassword: string;
+  newPassword: string;
+  confirmPassword: string;
+}
+
+export const validatePasswordChangeForm = (data: PasswordChangeData): Record<keyof PasswordChangeData, string> => {
+  const errors: Record<keyof PasswordChangeData, string> = {
+    currentPassword: "",
+    newPassword: "",
+    confirmPassword: "",
+  };
+
+  // Validate current password
+  if (!data.currentPassword.trim()) {
+    errors.currentPassword = "Mật khẩu hiện tại không được để trống";
+  }
+
+  // Validate new password
+  if (!data.newPassword.trim()) {
+    errors.newPassword = "Mật khẩu mới không được để trống";
+  } else {
+    const strengthValidation = validatePasswordStrength(data.newPassword);
+    if (!strengthValidation.isValid) {
+      errors.newPassword = strengthValidation.errors[0]; // Show first error only
+    }
+  }
+
+  // Validate confirm password
+  if (!data.confirmPassword.trim()) {
+    errors.confirmPassword = "Xác nhận mật khẩu không được để trống";
+  } else if (data.newPassword !== data.confirmPassword) {
+    errors.confirmPassword = "Mật khẩu xác nhận không khớp";
+  }
+
+  // Check if new password is different from current
+  if (data.currentPassword && data.newPassword && data.currentPassword === data.newPassword) {
+    errors.newPassword = "Mật khẩu mới phải khác mật khẩu hiện tại";
   }
 
   return errors;
