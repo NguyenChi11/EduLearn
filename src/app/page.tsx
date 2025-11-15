@@ -1,11 +1,47 @@
-import { redirect } from "next/navigation";
+// app/page.tsx
+"use client";
 
-export default function HomePage() {
-  const isLoggedIn = false;
+import { useEffect, useState } from "react";
+import Header from "@/components/layout/Header";
+import Hero from "@/components/home/Hero";
+import Features from "@/components/home/Features";
+import { getStoredUser, clearStoredUser } from "@/utils/auth-utils";
 
-  if (!isLoggedIn) {
-    redirect("/login");
+export default function Home() {
+  const [user, setUser] = useState<{
+    id: string;
+    email: string;
+    name: string;
+  } | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const stored = getStoredUser();
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setUser(stored);
+    setIsLoading(false);
+  }, []);
+
+  const handleLogout = () => {
+    clearStoredUser();
+    setUser(null);
+  };
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen">
+        <div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin" />
+      </div>
+    );
   }
 
-  return <div>abc</div>;
+  return (
+    <div className="min-h-screen bg-white dark:bg-slate-950">
+      <Header user={user} onLogout={handleLogout} />
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+        <Hero isLoggedIn={!!user} />
+        <Features />
+      </main>
+    </div>
+  );
 }
