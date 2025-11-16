@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, ChangeEvent, useRef } from "react";
-import { User as UserIcon, Upload, X } from "lucide-react";
+import { User as Upload, X } from "lucide-react";
 
 import Button from "@/components/ui/Button";
 import Input from "@/components/ui/Input";

@@ -4,6 +4,7 @@
 import { useEffect, useState } from "react";
 import Header from "@/components/layout/Header";
 import Hero from "@/components/home/Hero";
+import Banner from "@/components/home/Banner";
 import Features from "@/components/home/Features";
 import { getStoredUser, clearStoredUser } from "@/utils/auth-utils";
 import Spinner from "@/components/ui/Spinner";
@@ -41,6 +42,7 @@ export default function Home() {
       <Header user={user} onLogout={handleLogout} />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <Hero isLoggedIn={!!user} />
+        <Banner isLoggedIn={!!user} />
         <Features />
       </main>
     </div>
