@@ -35,6 +35,7 @@ export default function Header({ user, onLogout }: HeaderProps) {
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [isVisible, setIsVisible] = useState(true);
   const [lastScrollY, setLastScrollY] = useState(0);
+  const [isExploreOpen, setIsExploreOpen] = useState(false);
 
   const handleNavigate = (path: string) => {
     router.push(path);
@@ -233,14 +234,44 @@ export default function Header({ user, onLogout }: HeaderProps) {
                 <span>Khóa học</span>
               </button>
 
-              <button
-                type="button"
-                onClick={() => handleNavigate("/courses")}
-                className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
-              >
-                <Icon icon={Compass} size="sm" />
-                <span>Explore</span>
-              </button>
+              <div className="relative">
+                <button
+                  type="button"
+                  onClick={() => setIsExploreOpen((prev) => !prev)}
+                  className="flex items-center gap-2 px-4 py-2 rounded-lg text-sm font-medium text-slate-700 dark:text-slate-300 hover:bg-slate-100 dark:hover:bg-slate-800 transition-colors"
+                  aria-haspopup="menu"
+                  aria-expanded={isExploreOpen}
+                >
+                  <Icon icon={Compass} size="sm" />
+                  <span>Explore</span>
+                </button>
+
+                {isExploreOpen && (
+                  <div className="absolute right-0 mt-2 w-56 rounded-lg border border-slate-200 bg-white shadow-lg dark:border-slate-700 dark:bg-slate-900 z-50">
+                    <button
+                      type="button"
+                      onClick={() => handleNavigate("/courses")}
+                      className="flex w-full items-center px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 dark:text-slate-200 dark:hover:bg-slate-800"
+                    >
+                      Danh sách khóa học
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => handleNavigate("/Instructor")}
+                      className="flex w-full items-center px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 dark:text-slate-200 dark:hover:bg-slate-800"
+                    >
+                      Danh sách giảng viên
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => handleNavigate("/faq")}
+                      className="flex w-full items-center px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 dark:text-slate-200 dark:hover:bg-slate-800"
+                    >
+                      FAQ
+                    </button>
+                  </div>
+                )}
+              </div>
             </nav>
 
             {/* Phần 3: Đăng ký/Đăng nhập, User, Thông báo */}
