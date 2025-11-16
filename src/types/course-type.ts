@@ -13,6 +13,8 @@ export interface Course {
   coverImage?: string;
   rating?: number;
   instructor?: string;
+  // Ảnh đại diện giảng viên (nếu có). Nếu không, UI sẽ hiển thị chữ cái đầu tên.
+  instructorAvatar?: string;
   enrolledCount?: number;
   category?: string;
 }
