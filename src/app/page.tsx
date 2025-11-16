@@ -3,9 +3,11 @@
 
 import { useEffect, useState } from "react";
 import Header from "@/components/layout/Header";
-import Hero from "@/components/home/Hero";
-import Banner from "@/components/home/Banner";
-import Features from "@/components/home/Features";
+import BannerCarousel from "@/components/home/BannerCarousel";
+import IntroSection from "@/components/home/IntroSection";
+import HomeCoursesSection from "@/components/home/HomeCoursesSection";
+import TestimonialsSection from "@/components/home/TestimonialsSection";
+import InstructorsSection from "@/components/home/InstructorsSection";
 import { getStoredUser, clearStoredUser } from "@/utils/auth-utils";
 import Spinner from "@/components/ui/Spinner";
 
@@ -41,9 +43,11 @@ export default function Home() {
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950">
       <Header user={user} onLogout={handleLogout} />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <Hero isLoggedIn={!!user} />
-        <Banner isLoggedIn={!!user} />
-        <Features />
+        <BannerCarousel isLoggedIn={!!user} />
+        <IntroSection />
+        <HomeCoursesSection />
+        <TestimonialsSection />
+        <InstructorsSection />
       </main>
     </div>
   );
