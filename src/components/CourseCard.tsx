@@ -3,8 +3,12 @@
 import Link from "next/link";
 import { Star, Users, Clock } from "lucide-react";
 import { useMemo } from "react";
-import { Course } from "@/types/course-type";
 import Image from "next/image";
+
+import { Course } from "@/types/course-type";
+import Card from "@/components/ui/Card";
+import Button from "@/components/ui/Button";
+import ProgressBar from "@/components/ui/ProgressBar";
 
 interface CourseCardProps extends Omit<Course, "lessons"> {
   instructor?: string;
@@ -36,7 +40,6 @@ export default function CourseCard({
   level,
   kindOfCourse,
   thumbnail,
-  coverImage,
   progress = 0,
   rating = 0,
   enrolledCount = 0,
@@ -57,8 +60,8 @@ export default function CourseCard({
   }, [kindOfCourse]);
 
   return (
-    <div className="overflow-hidden rounded-lg border border-slate-200 dark:border-slate-800 bg-white dark:bg-slate-900 text-slate-900 dark:text-white shadow-sm hover:shadow-lg transition-shadow h-full flex flex-col">
-      <div className="w-full aspect-video overflow-hidden bg-slate-100 dark:bg-slate-800">
+    <Card className="h-full flex flex-col p-0" hover>
+      <div className="w-full aspect-video overflow-hidden bg-slate-100 dark:bg-slate-800 rounded-t-xl">
         {thumbnail ? (
           <Image
             src={thumbnail}
@@ -78,7 +81,7 @@ export default function CourseCard({
       </div>
 
       {/* Header */}
-      <div className="flex flex-col space-y-1.5 p-6 flex-1">
+      <div className="flex flex-col space-y-1.5 p-6 flex-1 border-b border-slate-200 dark:border-slate-800">
         <div className="flex items-start justify-between gap-2 mb-2 flex-wrap">
           <span
             className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold ${levelColor}`}
@@ -100,7 +103,7 @@ export default function CourseCard({
       </div>
 
       {/* Content */}
-      <div className="p-6 pt-0 space-y-3">
+      <div className="p-6 pt-4 space-y-3">
         <div className="flex items-center justify-between text-sm text-slate-600 dark:text-slate-400 flex-wrap gap-2">
           <div className="flex items-center gap-1">
             <Star
@@ -127,17 +130,7 @@ export default function CourseCard({
               </span>
               <span className="font-medium">{progress}%</span>
             </div>
-            <div className="w-full bg-slate-200 dark:bg-slate-800 rounded-full h-2">
-              <div
-                className="bg-blue-600 dark:bg-blue-500 rounded-full h-2 transition-all duration-300"
-                style={{ width: `${progress}%` }}
-                role="progressbar"
-                aria-valuenow={progress}
-                aria-valuemin={0}
-                aria-valuemax={100}
-                aria-label={`Course progress: ${progress}%`}
-              />
-            </div>
+            <ProgressBar value={progress} height="h-2" />
           </div>
         )}
       </div>
@@ -145,17 +138,14 @@ export default function CourseCard({
       {/* Footer */}
       <div className="flex items-center p-6 pt-0">
         <Link href={`/courses/${id}`} className="w-full">
-          <button
-            className={`inline-flex w-full items-center justify-center whitespace-nowrap rounded-md text-sm font-medium ring-offset-background transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 dark:focus-visible:ring-offset-slate-900 disabled:pointer-events-none disabled:opacity-50 h-10 px-4 py-2 ${
-              progress > 0
-                ? "border border-slate-300 dark:border-slate-700 bg-white dark:bg-slate-950 text-slate-900 dark:text-white hover:bg-slate-50 dark:hover:bg-slate-900"
-                : "bg-blue-600 dark:bg-blue-500 text-white hover:bg-blue-700 dark:hover:bg-blue-600"
-            }`}
+          <Button
+            variant={progress > 0 ? "secondary" : "primary"}
+            className="w-full"
           >
             {progress > 0 ? "Tiếp tục" : "Xem chi tiết"}
-          </button>
+          </Button>
         </Link>
       </div>
-    </div>
+    </Card>
   );
 }

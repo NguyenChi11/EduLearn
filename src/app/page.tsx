@@ -3,9 +3,13 @@
 
 import { useEffect, useState } from "react";
 import Header from "@/components/layout/Header";
-import Hero from "@/components/home/Hero";
-import Features from "@/components/home/Features";
+import BannerCarousel from "@/components/home/BannerCarousel";
+import IntroSection from "@/components/home/IntroSection";
+import HomeCoursesSection from "@/components/home/HomeCoursesSection";
+import TestimonialsSection from "@/components/home/TestimonialsSection";
+import InstructorsSection from "@/components/home/InstructorsSection";
 import { getStoredUser, clearStoredUser } from "@/utils/auth-utils";
+import Spinner from "@/components/ui/Spinner";
 
 export default function Home() {
   const [user, setUser] = useState<{
@@ -29,18 +33,21 @@ export default function Home() {
 
   if (isLoading) {
     return (
-      <div className="flex items-center justify-center min-h-screen">
-        <div className="w-8 h-8 border-4 border-blue-600 border-t-transparent rounded-full animate-spin" />
+      <div className="flex items-center justify-center min-h-screen bg-slate-50 dark:bg-slate-950">
+        <Spinner size="lg" />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-white dark:bg-slate-950">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950">
       <Header user={user} onLogout={handleLogout} />
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        <Hero isLoggedIn={!!user} />
-        <Features />
+        <BannerCarousel isLoggedIn={!!user} />
+        <IntroSection />
+        <HomeCoursesSection />
+        <TestimonialsSection />
+        <InstructorsSection />
       </main>
     </div>
   );

@@ -1,5 +1,5 @@
 import React from "react";
-import SearchFilter, { FilterOptions } from "@/components/SearchFilter";
+import SearchFilter, { FilterOptions, SortOption } from "@/components/SearchFilter";
 
 interface CourseSearchSectionProps {
   categories: string[];
@@ -10,6 +10,8 @@ interface CourseSearchSectionProps {
   filterOptions: FilterOptions;
   coursesFound: number;
   totalCourses: number;
+  sortBy: SortOption;
+  onSortChange: (sort: SortOption) => void;
 }
 
 export default function CourseSearchSection({
@@ -17,8 +19,8 @@ export default function CourseSearchSection({
   levels,
   onSearch,
   onFilter,
-  searchQuery,
-  filterOptions,
+  sortBy,
+  onSortChange,
   coursesFound,
   totalCourses,
 }: CourseSearchSectionProps) {
@@ -35,6 +37,8 @@ export default function CourseSearchSection({
         onFilter={onFilter}
         categories={categories}
         levels={levels as readonly ("S" | "Pres" | "TC" | "MTC")[]}
+        sortBy={sortBy}
+        onSortChange={onSortChange}
       />
       <p className="text-sm text-slate-600 dark:text-slate-400 mt-6">
         Tìm thấy {coursesFound} khóa học
