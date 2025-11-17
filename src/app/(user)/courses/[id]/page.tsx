@@ -2,12 +2,12 @@
 
 import { useEffect, useState, useMemo } from "react";
 import { useRouter, useParams } from "next/navigation";
+
 import { MOCK_COURSES } from "@/data/mock-data";
 import { getStoredUser } from "@/utils/auth-utils";
 import { User } from "@/types/user-type";
 import { Course } from "@/types/course-type";
 import { getCourseProgress, getLessonStatus } from "@/utils/progress-utils";
-import { ArrowLeft, BookOpen, Star } from "lucide-react";
 import BackButton from "@/components/ui/BackButton";
 import CourseHero from "@/components/course-detail/CourseHero";
 import CourseStats from "@/components/course-detail/CourseStats";
@@ -111,3 +111,5 @@ export default function CourseDetailPage() {
     </main>
   );
 }
+
+

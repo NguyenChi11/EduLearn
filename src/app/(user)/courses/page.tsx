@@ -58,9 +58,7 @@ export default function CoursesPage() {
 
     // Filter by multiple categories
     if (filters.categories && filters.categories.length > 0) {
-      results = results.filter((c) =>
-        filters.categories!.includes(c.kindOfCourse)
-      );
+      results = results.filter((c) => filters.categories!.includes(c.kindOfCourse));
     }
 
     // Filter by multiple levels
@@ -126,3 +124,5 @@ export default function CoursesPage() {
     </div>
   );
 }
+
+

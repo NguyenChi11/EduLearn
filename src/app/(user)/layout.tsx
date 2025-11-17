@@ -1,6 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+
 import { bricolageGrotesque } from "@/fonts";
+import AppFooterShell from "@/components/layout/AppFooterShell";
+
 import "@/styles/globals.css";
 
 const geistSans = Geist({
@@ -29,7 +32,9 @@ export default function RootLayout({
         className={` ${bricolageGrotesque.variable} ${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <div className="flex min-h-screen">
-          <main className="flex-1 bg-gray-50 overflow-y-auto">{children}</main>
+          <main className="flex-1 bg-gray-50 overflow-y-auto">
+            <AppFooterShell>{children}</AppFooterShell>
+          </main>
         </div>
       </body>
     </html>
