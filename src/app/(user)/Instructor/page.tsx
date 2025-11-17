@@ -226,9 +226,7 @@ export default function InstructorsPage() {
         <div className="space-y-3">
           <p className="text-xs text-slate-600 dark:text-slate-400">
             Đang hiển thị{" "}
-            <span className="font-semibold">
-              {filteredInstructors.length}
-            </span>{" "}
+            <span className="font-semibold">{filteredInstructors.length}</span>{" "}
             giảng viên
           </p>
 

@@ -6,7 +6,7 @@ import Header from "@/components/layout/Header";
 import MobileHeader from "@/components/layout/MobileHeader";
 import { useStoredUser } from "@/hooks/useStoredUser";
 
-export default function UserLayout({
+export default function InstructorLayout({
   children,
 }: {
   children: React.ReactNode;
@@ -29,3 +29,5 @@ export default function UserLayout({
     </div>
   );
 }
+
+
