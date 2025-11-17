@@ -1,30 +1,77 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
-import { useEffect } from "react";
-import { getStoredInstructor } from "@/utils/auth-utils";
+
+import { clearStoredInstructor, getStoredInstructor } from "@/utils/auth-utils";
+import InstructorHeader from "@/components/layout/InstructorHeader";
+import InstructorMobileHeader from "@/components/layout/InstructorMobileHeader";
+import Spinner from "@/components/ui/Spinner";
+import InstructorWelcomeSection from "@/components/(instructor)/InstructorWelcomeSection";
+import InstructorStatsSection from "@/components/(instructor)/InstructorStatsSection";
+import InstructorTeachingInsightsSection from "@/components/(instructor)/InstructorTeachingInsightsSection";
+import InstructorRecentCoursesSection from "@/components/(instructor)/InstructorRecentCoursesSection";
+import InstructorStudentFeedbackSection from "@/components/(instructor)/InstructorStudentFeedbackSection";
+
+interface InstructorUser {
+  id: string;
+  email: string;
+  name: string;
+}
 
 export default function InstructorHomePage() {
   const router = useRouter();
+  const [instructor, setInstructor] = useState<InstructorUser | null>(null);
+  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const instructor = getStoredInstructor();
-    if (!instructor) {
+    const stored = getStoredInstructor();
+    if (stored) {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setInstructor(stored);
+      setIsLoading(false);
+    } else {
       router.replace("/auth?mode=login&role=instructor");
     }
   }, [router]);
 
-  return (
-    <main className="min-h-screen bg-slate-50 dark:bg-slate-950 flex items-center justify-center px-4">
-      <div className="max-w-2xl w-full bg-white dark:bg-slate-900 rounded-xl shadow-lg p-8 space-y-4">
-        <h1 className="text-2xl font-bold text-slate-900 dark:text-white text-center">
-          Trang chủ giảng viên
-        </h1>
-        <p className="text-sm text-slate-600 dark:text-slate-300 text-center">
-          Đây là trang Home giảng viên trong group (instructor). Sau khi đăng
-          nhập ở tab Giảng viên, hệ thống sẽ chuyển đến trang này.
-        </p>
+  const handleLogout = () => {
+    clearStoredInstructor();
+    setInstructor(null);
+    router.replace("/auth?mode=login&role=instructor");
+  };
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-slate-50 dark:bg-slate-950">
+        <Spinner size="lg" />
       </div>
-    </main>
+    );
+  }
+
+  return (
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950">
+      {/* Header mobile & desktop giống header học viên nhưng cho giảng viên */}
+      <InstructorMobileHeader instructor={instructor} onLogout={handleLogout} />
+      <div className="hidden md:block">
+        <InstructorHeader instructor={instructor} onLogout={handleLogout} />
+      </div>
+
+      <main className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10 space-y-8">
+        <InstructorWelcomeSection
+          nameOrEmail={instructor?.name || instructor?.email || "Giảng viên"}
+          onGoToCourses={() => router.push("/courses-instructor")}
+          onGoToProfile={() => router.push("/information-instructor")}
+        />
+
+        <InstructorStatsSection />
+
+        <InstructorTeachingInsightsSection />
+
+        <InstructorRecentCoursesSection />
+
+        <InstructorStudentFeedbackSection />
+      </main>
+    </div>
   );
 }
