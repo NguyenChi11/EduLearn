@@ -15,11 +15,15 @@ export default function InstructorRecentCoursesSection() {
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {recentCourses.map((course) => (
-          <CourseCard key={course.id} {...course} />
+          <CourseCard
+            key={course.id}
+            {...course}
+            showInstructor={false}
+            detailHref={`/courses-instructor/${course.id}`}
+          />
         ))}
       </div>
     </SectionBox>
   );
 }
-
 

@@ -14,6 +14,10 @@ interface CourseCardProps extends Omit<Course, "lessons"> {
   instructor?: string;
   enrolledCount?: number;
   rating?: number;
+  /** Ẩn/hiện phần hiển thị tên giảng viên (dùng để ẩn trên trang giảng viên) */
+  showInstructor?: boolean;
+  /** Link chi tiết (mặc định: /courses/[id]) - dùng để đổi sang route giảng viên */
+  detailHref?: string;
 }
 
 const LEVEL_COLOR_MAP: Record<string, string> = {
@@ -44,6 +48,8 @@ export default function CourseCard({
   rating = 0,
   enrolledCount = 0,
   instructor = "Unknown",
+  showInstructor = true,
+  detailHref,
 }: CourseCardProps) {
   const levelColor = useMemo(() => {
     return (
@@ -116,10 +122,12 @@ export default function CourseCard({
             <Users className="w-4 h-4" aria-hidden="true" />
             <span>{enrolledCount.toLocaleString()}</span>
           </div>
-          <div className="flex items-center gap-1">
-            <Clock className="w-4 h-4" aria-hidden="true" />
-            <span className="truncate">{instructor}</span>
-          </div>
+          {showInstructor && (
+            <div className="flex items-center gap-1">
+              <Clock className="w-4 h-4" aria-hidden="true" />
+              <span className="truncate">{instructor}</span>
+            </div>
+          )}
         </div>
 
         {progress > 0 && (
@@ -137,7 +145,7 @@ export default function CourseCard({
 
       {/* Footer */}
       <div className="flex items-center p-6 pt-0">
-        <Link href={`/courses/${id}`} className="w-full">
+        <Link href={detailHref ?? `/courses/${id}`} className="w-full">
           <Button
             variant={progress > 0 ? "secondary" : "primary"}
             className="w-full"

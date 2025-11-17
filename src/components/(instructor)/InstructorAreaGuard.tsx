@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/navigation";
 
 import { getStoredUser } from "@/utils/auth-utils";
@@ -16,8 +16,6 @@ export default function InstructorAreaGuard({
 }: InstructorAreaGuardProps) {
   const router = useRouter();
   const { instructor, isHydrated, loadInstructor } = useInstructor();
-  const [isChecking, setIsChecking] = useState(true);
-  const [isAllowed, setIsAllowed] = useState(false);
 
   useEffect(() => {
     if (!isHydrated) return;
@@ -35,14 +33,20 @@ export default function InstructorAreaGuard({
         // Chưa đăng nhập giảng viên -> yêu cầu đăng nhập role giảng viên
         router.replace("/auth?mode=login&role=instructor");
       }
-      return;
     }
-
-    setIsAllowed(true);
-    setIsChecking(false);
   }, [instructor, isHydrated, loadInstructor, router]);
 
-  if (!isHydrated || isChecking || !isAllowed) {
+  // Đang đồng bộ dữ liệu từ localStorage
+  if (!isHydrated) {
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-slate-50 dark:bg-slate-950">
+        <Spinner size="lg" />
+      </div>
+    );
+  }
+
+  // Đã hydrate nhưng không có instructor -> hiệu ứng sẽ điều hướng; hiển thị loading trong lúc chờ
+  if (!instructor) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-slate-50 dark:bg-slate-950">
         <Spinner size="lg" />
