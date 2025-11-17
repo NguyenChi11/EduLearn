@@ -1,11 +1,21 @@
-import { User } from "@/types/user-type";
 import { ValidationErrors } from "@/types/validate-type";
 
-export const DEMO_USER = {
-  id: "user1",
-  email: "user@example.com",
+// Demo tài khoản học viên
+export const DEMO_STUDENT = {
+  id: "student1",
+  email: "student@example.com",
   password: "password123",
 } as const;
+
+// Demo tài khoản giảng viên
+export const DEMO_INSTRUCTOR = {
+  id: "instructor1",
+  email: "instructor@example.com",
+  password: "password123",
+} as const;
+
+// Giữ DEMO_USER cho tương thích ngược (đóng vai học viên)
+export const DEMO_USER = DEMO_STUDENT;
 
 export const validateEmail = (email: string): boolean => {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -16,7 +26,9 @@ export const validatePassword = (password: string): boolean => {
   return password.length >= 6;
 };
 
-export const validatePasswordStrength = (password: string): { isValid: boolean; errors: string[] } => {
+export const validatePasswordStrength = (
+  password: string
+): { isValid: boolean; errors: string[] } => {
   const errors: string[] = [];
 
   if (password.length < 8) {
@@ -41,7 +53,7 @@ export const validatePasswordStrength = (password: string): { isValid: boolean; 
 
   return {
     isValid: errors.length === 0,
-    errors
+    errors,
   };
 };
 
@@ -74,7 +86,9 @@ export interface PasswordChangeData {
   confirmPassword: string;
 }
 
-export const validatePasswordChangeForm = (data: PasswordChangeData): Record<keyof PasswordChangeData, string> => {
+export const validatePasswordChangeForm = (
+  data: PasswordChangeData
+): Record<keyof PasswordChangeData, string> => {
   const errors: Record<keyof PasswordChangeData, string> = {
     currentPassword: "",
     newPassword: "",
@@ -104,7 +118,11 @@ export const validatePasswordChangeForm = (data: PasswordChangeData): Record<key
   }
 
   // Check if new password is different from current
-  if (data.currentPassword && data.newPassword && data.currentPassword === data.newPassword) {
+  if (
+    data.currentPassword &&
+    data.newPassword &&
+    data.currentPassword === data.newPassword
+  ) {
     errors.newPassword = "Mật khẩu mới phải khác mật khẩu hiện tại";
   }
 
@@ -132,5 +150,30 @@ export const getStoredUser = () => {
 export const clearStoredUser = () => {
   if (typeof window !== "undefined") {
     localStorage.removeItem("user");
+  }
+};
+
+// Lưu / lấy / xoá tài khoản giảng viên riêng biệt với học viên
+export const setStoredInstructor = (instructor: {
+  id: string;
+  email: string;
+  name: string;
+}) => {
+  if (typeof window !== "undefined") {
+    localStorage.setItem("instructor", JSON.stringify(instructor));
+  }
+};
+
+export const getStoredInstructor = () => {
+  if (typeof window !== "undefined") {
+    const raw = localStorage.getItem("instructor");
+    return raw ? JSON.parse(raw) : null;
+  }
+  return null;
+};
+
+export const clearStoredInstructor = () => {
+  if (typeof window !== "undefined") {
+    localStorage.removeItem("instructor");
   }
 };

@@ -13,12 +13,13 @@ interface AppFooterShellProps {
 export default function AppFooterShell({ children }: AppFooterShellProps) {
   const pathname = usePathname();
   const isCoursesRoute = pathname?.startsWith("/courses");
+  const isAuthRoute = pathname === "/auth";
 
   return (
     <>
       {children}
 
-      {!isCoursesRoute && (
+      {!isCoursesRoute && !isAuthRoute && (
         <>
           <MobileFooter />
           <div className="hidden md:block">
@@ -29,5 +30,3 @@ export default function AppFooterShell({ children }: AppFooterShellProps) {
     </>
   );
 }
-
-
