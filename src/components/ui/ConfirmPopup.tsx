@@ -25,7 +25,7 @@ export default function ConfirmPopup({
   if (!open) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm">
+    <div className="fixed inset-0 z-60 flex items-center justify-center bg-black/40 backdrop-blur-sm">
       <div
         className={cn(
           "bg-white dark:bg-slate-900 shadow-xl rounded-lg p-6 w-[90vw] max-w-sm",
