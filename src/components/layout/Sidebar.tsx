@@ -42,16 +42,24 @@ export default function Sidebar({
     { label: "Cài đặt", icon: Settings, href: "/courses/settings" },
   ];
 
+  const handleMobileAutoCollapse = () => {
+    if (typeof window !== "undefined" && window.innerWidth < 768) {
+      setCollapsed(true);
+      onCollapse?.(true);
+    }
+  };
+
   const handleLogout = () => {
     clearStoredUser();
     router.push("/");
+    handleMobileAutoCollapse();
   };
 
   return (
     <aside
       className={cn(
-        "fixed left-0 top-0 h-screen z-40 bg-slate-950/95 backdrop-blur-md text-slate-50 border-r border-slate-800/80 shadow-xl overflow-hidden transition-[width] duration-300",
-        collapsed ? "w-20" : "w-64"
+        "fixed left-0 top-0 h-screen z-40 bg-slate-950/95 backdrop-blur-md text-slate-50 border-r border-slate-800/80 shadow-xl overflow-hidden transition-[width] duration-300 ",
+        collapsed ? " w-20" : "xsm:w-full w-64"
       )}
     >
       <div className="flex flex-col h-full p-3 md:p-4">
@@ -75,6 +83,7 @@ export default function Sidebar({
               <Link
                 key={item.href}
                 href={item.href}
+                onClick={handleMobileAutoCollapse}
                 className={cn(
                   "group flex items-center rounded-md py-2.5 text-sm font-medium transition-colors",
                   collapsed ? "justify-center px-0" : "px-3 gap-3",
@@ -96,10 +105,15 @@ export default function Sidebar({
 
         {/* User + EduLearn + logout */}
         <div className="border-t border-slate-800 mt-4 pt-4 space-y-3">
-          {/* User row */}
-          <div
+          {/* User row (link tới trang user) */}
+          <button
+            type="button"
+            onClick={() => {
+              router.push("/user");
+              handleMobileAutoCollapse();
+            }}
             className={cn(
-              "group flex items-center rounded-md bg-slate-900/70 py-2.5 text-sm font-medium text-slate-50 transition-colors hover:bg-slate-800",
+              "group flex w-full items-center rounded-md bg-slate-900/70 py-2.5 text-sm font-medium text-slate-50 transition-colors hover:bg-slate-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 justify-start",
               collapsed ? "justify-center px-0" : "px-3 gap-2"
             )}
           >
@@ -107,16 +121,17 @@ export default function Sidebar({
               {userName.charAt(0).toUpperCase()}
             </div>
             {!collapsed && (
-              <div className="flex flex-col transition-transform duration-200 group-hover:translate-x-0.5">
+              <div className="flex flex-col transition-transform justify-start duration-200 group-hover:translate-x-0.5">
                 <p className="text-sm font-semibold truncate">{userName}</p>
-                <p className="text-xs text-slate-400">Học viên</p>
+                <p className="text-xs flex text-slate-400">Học viên</p>
               </div>
             )}
-          </div>
+          </button>
 
           {/* EduLearn logo / link back to home */}
           <Link
             href="/"
+            onClick={handleMobileAutoCollapse}
             className={cn(
               "group flex items-center rounded-lg bg-slate-900/70 py-2.5 text-sm font-medium transition-colors hover:bg-slate-800",
               collapsed ? "justify-center px-0" : "px-3 gap-2"

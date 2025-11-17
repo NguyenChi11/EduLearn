@@ -11,7 +11,7 @@ import type { User } from "@/types/user-type";
 import CourseSearchSection from "@/components/courses/CourseSearchSection";
 import CourseGridView from "@/components/courses/CourseGridView";
 import Pagination from "@/components/ui/Pagination";
-import { FilterOptions, SortOption } from "@/components/SearchFilter";
+import { FilterOptions, SortOption } from "@/components/home/SearchFilter";
 
 const ITEMS_PER_PAGE = 9;
 
@@ -70,9 +70,7 @@ export default function CoursesPage() {
 
     // Sorting
     if (sortBy === "popular") {
-      results.sort(
-        (a, b) => (b.enrolledCount ?? 0) - (a.enrolledCount ?? 0)
-      );
+      results.sort((a, b) => (b.enrolledCount ?? 0) - (a.enrolledCount ?? 0));
     } else if (sortBy === "rating") {
       results.sort((a, b) => (b.rating ?? 0) - (a.rating ?? 0));
     } else if (sortBy === "title-asc") {
@@ -99,25 +97,32 @@ export default function CoursesPage() {
   if (!user) return null;
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 p-4 md:p-8">
-      <CourseSearchSection
-        categories={categories}
-        levels={[...levels]}
-        onSearch={setSearchQuery}
-        onFilter={setFilters}
-        searchQuery={searchQuery}
-        filterOptions={filters}
-        coursesFound={filteredCourses.length}
-        totalCourses={MOCK_COURSES.length}
-        sortBy={sortBy}
-        onSortChange={setSortBy}
-      />
-      <CourseGridView courses={paginatedCourses} userId={user.id} />
-      <Pagination
-        page={currentPage}
-        pageCount={totalPages}
-        onPageChange={changePage}
-      />
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 px-4 py-6 md:px-6 lg:px-8">
+      <div className="mx-auto w-full max-w-6xl">
+        <CourseSearchSection
+          categories={categories}
+          levels={[...levels]}
+          onSearch={setSearchQuery}
+          onFilter={setFilters}
+          searchQuery={searchQuery}
+          filterOptions={filters}
+          coursesFound={filteredCourses.length}
+          totalCourses={MOCK_COURSES.length}
+          sortBy={sortBy}
+          onSortChange={setSortBy}
+        />
+
+        <div className="mt-6 space-y-8">
+          <CourseGridView courses={paginatedCourses} userId={user.id} />
+          <div className="flex justify-center">
+            <Pagination
+              page={currentPage}
+              pageCount={totalPages}
+              onPageChange={changePage}
+            />
+          </div>
+        </div>
+      </div>
     </div>
   );
 }

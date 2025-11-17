@@ -4,7 +4,6 @@ import { useState, useCallback, useRef, useEffect } from "react";
 import { Search, X, Check, Filter } from "lucide-react";
 
 import Button from "@/components/ui/Button";
-import Input from "@/components/ui/Input";
 import Label from "@/components/ui/Label";
 import Card from "@/components/ui/Card";
 
@@ -40,7 +39,9 @@ export default function SearchFilter({
 }: SearchFilterProps) {
   const [query, setQuery] = useState<string>("");
   const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
-  const [selectedLevels, setSelectedLevels] = useState<("S" | "Pres" | "TC" | "MTC")[]>([]);
+  const [selectedLevels, setSelectedLevels] = useState<
+    ("S" | "Pres" | "TC" | "MTC")[]
+  >([]);
   const [openFilterDropdown, setOpenFilterDropdown] = useState<boolean>(false);
   const filterDropdownRef = useRef<HTMLDivElement>(null);
 
@@ -73,7 +74,8 @@ export default function SearchFilter({
         : [...selectedLevels, level];
       setSelectedLevels(newLevels);
       onFilter({
-        categories: selectedCategories.length > 0 ? selectedCategories : undefined,
+        categories:
+          selectedCategories.length > 0 ? selectedCategories : undefined,
         levels: newLevels.length > 0 ? newLevels : undefined,
       });
     },
@@ -88,7 +90,9 @@ export default function SearchFilter({
     onFilter({});
   }, [onSearch, onFilter]);
 
-  const hasActiveFilters = !!(selectedCategories.length > 0 || selectedLevels.length > 0);
+  const hasActiveFilters = !!(
+    selectedCategories.length > 0 || selectedLevels.length > 0
+  );
 
   // Close dropdowns when clicking outside
   useEffect(() => {
@@ -116,7 +120,7 @@ export default function SearchFilter({
 
   return (
     <div className="space-y-3">
-      {/* Search + Sort + Filter in one row */}
+      {/* Search + Sort + Filter */}
       <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
         {/* Search Bar */}
         <div className="relative flex-1">
@@ -142,10 +146,10 @@ export default function SearchFilter({
         </div>
 
         {/* Sort & Filter controls */}
-        <div className="flex items-center gap-2 md:ml-4">
+        <div className="mt-1 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-end md:ml-4">
           {/* Sort segmented control (no native select) */}
           <div className="flex items-center gap-2">
-            <Label className="text-xs md:text-sm text-slate-600 dark:text-slate-400 whitespace-nowrap">
+            <Label className="hidden sm:block text-xs md:text-sm text-slate-600 dark:text-slate-400 whitespace-nowrap">
               Sắp xếp
             </Label>
             <div
@@ -185,7 +189,7 @@ export default function SearchFilter({
               variant="secondary"
               type="button"
               onClick={() => setOpenFilterDropdown((prev) => !prev)}
-              className="h-10 px-3 flex items-center gap-2"
+              className="h-10 px-3 flex items-center justify-center gap-2 w-full sm:w-auto"
               aria-expanded={openFilterDropdown}
             >
               <Filter className="h-4 w-4" />
