@@ -13,6 +13,8 @@ interface AuthFormProps {
   onInputChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onSubmit: (e: React.FormEvent) => void;
   onToggle: () => void;
+  demoEmailPlaceholder?: string;
+  demoEmailHint?: string;
 }
 
 export default function AuthForm({
@@ -23,6 +25,8 @@ export default function AuthForm({
   onInputChange,
   onSubmit,
   onToggle,
+  demoEmailPlaceholder,
+  demoEmailHint,
 }: AuthFormProps) {
   const isFormValid = isLogin
     ? !!formData.email && !!formData.password && !isLoading
@@ -53,12 +57,16 @@ export default function AuthForm({
         type="email"
         value={formData.email}
         onChange={onInputChange}
-        placeholder={isLogin ? "user@example.com" : "your@email.com"}
+        placeholder={
+          isLogin
+            ? demoEmailPlaceholder ?? "user@example.com"
+            : "your@email.com"
+        }
         label="Email"
         error={errors.email}
         disabled={isLoading}
         icon={Mail}
-        hint={isLogin ? "Demo: user@example.com" : undefined}
+        hint={isLogin ? demoEmailHint : undefined}
       />
 
       <PasswordField

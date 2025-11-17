@@ -159,7 +159,7 @@ export default function InstructorsPage() {
                   onClick={() => setSortBy("name-asc")}
                   className={`px-3 py-1.5 text-xs md:text-sm rounded-full font-medium ${
                     sortBy === "name-asc"
-                      ? "bg-gradient-to-r from-blue-600 to-indigo-500 text-white"
+                      ? "bg-linear-to-r from-blue-600 to-indigo-500 text-white"
                       : "text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
                   }`}
                 >
@@ -170,7 +170,7 @@ export default function InstructorsPage() {
                   onClick={() => setSortBy("name-desc")}
                   className={`px-3 py-1.5 text-xs md:text-sm rounded-full font-medium ${
                     sortBy === "name-desc"
-                      ? "bg-gradient-to-r from-blue-600 to-indigo-500 text-white"
+                      ? "bg-linear-to-r from-blue-600 to-indigo-500 text-white"
                       : "text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
                   }`}
                 >
@@ -181,7 +181,7 @@ export default function InstructorsPage() {
                   onClick={() => setSortBy("courses-desc")}
                   className={`px-3 py-1.5 text-xs md:text-sm rounded-full font-medium ${
                     sortBy === "courses-desc"
-                      ? "bg-gradient-to-r from-blue-600 to-indigo-500 text-white"
+                      ? "bg-linear-to-r from-blue-600 to-indigo-500 text-white"
                       : "text-slate-600 hover:bg-slate-100 dark:text-slate-300 dark:hover:bg-slate-800"
                   }`}
                 >
@@ -292,5 +292,3 @@ export default function InstructorsPage() {
     </main>
   );
 }
-
-
