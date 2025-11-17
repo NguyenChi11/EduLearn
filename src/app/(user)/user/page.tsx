@@ -21,14 +21,14 @@ import {
   PhotoTab,
   SecurityTab,
 } from "@/components/user";
-import { useStoredUser } from "@/hooks/useStoredUser";
+import { useUser } from "@/contexts/UserContext";
 
 type UserTab = "public" | "profile" | "photo" | "security";
 
 export default function UserPage() {
   const [activeTab, setActiveTab] = useState<UserTab>("public");
   const [avatarPreview, setAvatarPreview] = useState<string | null>(null);
-  const { user, isHydrated, setUser } = useStoredUser();
+  const { user, setUser } = useUser();
 
   const tabs: { key: UserTab; label: string; icon: LucideIcon }[] = [
     { key: "public", label: "View public profile", icon: Eye },
@@ -61,8 +61,6 @@ export default function UserPage() {
   };
 
   const handlePasswordChange = () => {
-    // Password changed successfully - could add additional logic here
-    // like showing a notification, logging, etc.
     console.log("Password changed successfully");
   };
 
@@ -94,7 +92,7 @@ export default function UserPage() {
   };
 
   return (
-    <UserAuthGuard isHydrated={isHydrated} user={user}>
+    <UserAuthGuard>
       <div className="bg-background py-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <UserMobileNavigation
@@ -104,14 +102,16 @@ export default function UserPage() {
           />
 
           <div className="grid gap-6 md:grid-cols-[260px_1fr]">
-            <UserDesktopSidebar
-              user={user!}
-              tabs={tabs}
-              activeTab={activeTab}
-              onTabChange={setActiveTab}
-            />
+            {user && (
+              <UserDesktopSidebar
+                user={user}
+                tabs={tabs}
+                activeTab={activeTab}
+                onTabChange={setActiveTab}
+              />
+            )}
 
-            <UserContent>{renderActiveTab(user!)}</UserContent>
+            <UserContent>{user && renderActiveTab(user)}</UserContent>
           </div>
         </div>
       </div>

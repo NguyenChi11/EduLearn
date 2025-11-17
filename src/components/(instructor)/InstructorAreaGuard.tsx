@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import { useRouter } from "next/navigation";
 
-import { getStoredInstructor, getStoredUser } from "@/utils/auth-utils";
+import { getStoredUser } from "@/utils/auth-utils";
+import { useInstructor } from "@/contexts/InstructorContext";
 import Spinner from "@/components/ui/Spinner";
 
 interface InstructorAreaGuardProps {
@@ -14,13 +15,17 @@ export default function InstructorAreaGuard({
   children,
 }: InstructorAreaGuardProps) {
   const router = useRouter();
+  const { instructor, isHydrated, loadInstructor } = useInstructor();
   const [isChecking, setIsChecking] = useState(true);
   const [isAllowed, setIsAllowed] = useState(false);
 
   useEffect(() => {
-    const instructor = getStoredInstructor();
+    if (!isHydrated) return;
 
-    if (!instructor) {
+    // Đảm bảo đã sync instructor mới nhất từ localStorage nếu cần
+    const currentInstructor = instructor ?? loadInstructor();
+
+    if (!currentInstructor) {
       const student = getStoredUser();
 
       if (student) {
@@ -33,12 +38,11 @@ export default function InstructorAreaGuard({
       return;
     }
 
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setIsAllowed(true);
     setIsChecking(false);
-  }, [router]);
+  }, [instructor, isHydrated, loadInstructor, router]);
 
-  if (isChecking || !isAllowed) {
+  if (!isHydrated || isChecking || !isAllowed) {
     return (
       <div className="flex items-center justify-center min-h-screen bg-slate-50 dark:bg-slate-950">
         <Spinner size="lg" />
@@ -48,5 +52,4 @@ export default function InstructorAreaGuard({
 
   return <>{children}</>;
 }
-
 

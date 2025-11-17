@@ -4,7 +4,7 @@ import { useRouter } from "next/navigation";
 
 import Header from "@/components/layout/Header";
 import MobileHeader from "@/components/layout/MobileHeader";
-import { useStoredUser } from "@/hooks/useStoredUser";
+import { useUser } from "@/contexts/UserContext";
 
 export default function InstructorLayout({
   children,
@@ -12,7 +12,7 @@ export default function InstructorLayout({
   children: React.ReactNode;
 }) {
   const router = useRouter();
-  const { user, logout } = useStoredUser();
+  const { user, logout } = useUser();
 
   const handleLogout = () => {
     logout();

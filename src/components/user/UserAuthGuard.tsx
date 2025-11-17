@@ -1,18 +1,19 @@
 "use client";
 
-import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { useRouter } from "next/navigation";
+
 import Button from "@/components/ui/Button";
 import Spinner from "@/components/ui/Spinner";
+import { useUser } from "@/contexts/UserContext";
 
 interface UserAuthGuardProps {
-  isHydrated: boolean;
-  user: any;
   children: React.ReactNode;
 }
 
-export function UserAuthGuard({ isHydrated, user, children }: UserAuthGuardProps) {
+export function UserAuthGuard({ children }: UserAuthGuardProps) {
   const router = useRouter();
+  const { user, isHydrated } = useUser();
 
   useEffect(() => {
     if (!isHydrated) return;

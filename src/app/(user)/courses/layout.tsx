@@ -3,8 +3,8 @@
 import { useState } from "react";
 
 import Sidebar from "@/components/layout/Sidebar";
-import { useStoredUser } from "@/hooks/useStoredUser";
 import StudentAreaGuard from "@/components/auth/StudentAreaGuard";
+import { useUser } from "@/contexts/UserContext";
 
 export default function RootLayout({
   children,
@@ -12,7 +12,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const [collapsed, setCollapsed] = useState(false);
-  const { user } = useStoredUser();
+  const { user } = useUser();
 
   const userName = user?.name || user?.email || "User";
 
