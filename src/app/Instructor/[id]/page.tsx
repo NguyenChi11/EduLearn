@@ -10,7 +10,7 @@ import { MOCK_COURSES } from "@/data/mock-data";
 import Card from "@/components/ui/Card";
 import Typography from "@/components/ui/Typography";
 import Button from "@/components/ui/Button";
-import CourseCard from "@/components/CourseCard";
+import CourseCard from "@/components/courses/CourseCard";
 import BackButton from "@/components/ui/BackButton";
 
 export default function InstructorDetailPage() {
@@ -64,7 +64,7 @@ export default function InstructorDetailPage() {
 
         {/* Thông tin chính của giảng viên */}
         <Card className="flex flex-col md:flex-row gap-6 p-6 md:p-8 items-center md:items-start bg-white/90 dark:bg-slate-900/90">
-          <div className="flex-shrink-0">
+          <div className="shrink-0">
             {instructor.avatarUrl ? (
               <div className="h-28 w-28 md:h-32 md:w-32 overflow-hidden rounded-full border border-slate-200 dark:border-slate-700">
                 <Image

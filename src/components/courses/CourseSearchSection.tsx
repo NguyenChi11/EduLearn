@@ -1,5 +1,8 @@
 import React from "react";
-import SearchFilter, { FilterOptions, SortOption } from "@/components/SearchFilter";
+import SearchFilter, {
+  FilterOptions,
+  SortOption,
+} from "@/components/home/SearchFilter";
 
 interface CourseSearchSectionProps {
   categories: string[];

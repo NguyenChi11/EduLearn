@@ -1,5 +1,5 @@
 import React from "react";
-import CourseCard from "@/components/CourseCard";
+import CourseCard from "@/components/courses/CourseCard";
 import { getCourseProgress } from "@/utils/progress-utils";
 import { Course } from "@/types/course-type";
 
@@ -8,9 +8,12 @@ interface CourseGridViewProps {
   userId: string;
 }
 
-export default function CourseGridView({ courses, userId }: CourseGridViewProps) {
+export default function CourseGridView({
+  courses,
+  userId,
+}: CourseGridViewProps) {
   return (
-    <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mt-6">
       {courses.map((course) => {
         const totalLessons = course.lessons.length || 0;
         return (

@@ -5,6 +5,7 @@ const config: Config = {
   theme: {
     screens: {
       lg: "1025px",
+      md: "768px",
       sm: "640px",
       xlg: {
         max: "1024px",

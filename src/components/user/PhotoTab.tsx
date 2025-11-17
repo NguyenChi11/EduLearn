@@ -109,7 +109,7 @@ export default function PhotoTab({
         </p>
       </div>
 
-      <div className="flex flex-col md:flex-row gap-8">
+      <div className="flex flex-col md:flex-row gap-8 mx-6">
         <div className="flex flex-col items-center gap-4">
           <UserAvatar
             src={currentAvatar}

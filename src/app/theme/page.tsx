@@ -10,6 +10,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 import Header from "@/components/layout/Header";
+import MobileHeader from "@/components/layout/MobileHeader";
 import { useStoredUser } from "@/hooks/useStoredUser";
 
 export default function ThemePage() {
@@ -23,7 +24,10 @@ export default function ThemePage() {
 
   return (
     <div className="min-h-screen bg-white dark:bg-slate-950">
-      <Header user={user} onLogout={handleLogout} />
+      <MobileHeader user={user} onLogout={handleLogout} />
+      <div className="hidden md:block">
+        <Header user={user} onLogout={handleLogout} />
+      </div>
       <main className="max-w-7xl mx-auto">
         {/* Header */}
         <header className="border-b border-slate-200 dark:border-slate-800 py-6 px-6 md:px-8">

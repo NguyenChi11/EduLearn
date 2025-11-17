@@ -3,6 +3,7 @@
 
 import { useEffect, useState } from "react";
 import Header from "@/components/layout/Header";
+import MobileHeader from "@/components/layout/MobileHeader";
 import BannerCarousel from "@/components/home/BannerCarousel";
 import IntroSection from "@/components/home/IntroSection";
 import HomeCoursesSection from "@/components/home/HomeCoursesSection";
@@ -41,7 +42,10 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950">
-      <Header user={user} onLogout={handleLogout} />
+      <MobileHeader user={user} onLogout={handleLogout} />
+      <div className="hidden md:block">
+        <Header user={user} onLogout={handleLogout} />
+      </div>
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <BannerCarousel isLoggedIn={!!user} />
         <IntroSection />

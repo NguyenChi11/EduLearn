@@ -18,7 +18,8 @@ const INSTRUCTOR_META: Partial<
     role: "Chuyên gia Frontend",
     expertise: "React, TypeScript, UI hiện đại",
     bio: "Hơn 7 năm kinh nghiệm phát triển ứng dụng web với React và hệ sinh thái JavaScript.",
-    avatarUrl: "/instructors/john-developer.jpg",
+    // Sử dụng ảnh có sẵn trong thư mục public
+    avatarUrl: "/react-course-thumbnail.jpg",
   },
   "Sarah Smith": {
     role: "Chuyên gia JavaScript",
@@ -29,7 +30,8 @@ const INSTRUCTOR_META: Partial<
     role: "Chuyên gia UI/UX",
     expertise: "Thiết kế trải nghiệm người dùng, prototype",
     bio: "Thiết kế hàng chục sản phẩm digital với trải nghiệm người dùng trực quan và đẹp mắt.",
-    avatarUrl: "/instructors/mike-design.png",
+    // Sử dụng ảnh có sẵn trong thư mục public
+    avatarUrl: "/ui-ux-design-course.jpg",
   },
   "Emma Full Stack": {
     role: "Full-stack Engineer",

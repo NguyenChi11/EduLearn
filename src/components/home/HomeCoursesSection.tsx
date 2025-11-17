@@ -1,5 +1,5 @@
 import { MOCK_COURSES } from "@/data/mock-data";
-import CourseCard from "@/components/CourseCard";
+import CourseCard from "@/components/courses/CourseCard";
 import Typography from "@/components/ui/Typography";
 
 export default function HomeCoursesSection() {
@@ -17,8 +17,8 @@ export default function HomeCoursesSection() {
             Các khóa học nổi bật
           </Typography>
           <p className="text-sm text-slate-600 dark:text-slate-400">
-            Chọn khóa học phù hợp với nhu cầu của bạn – bắt đầu từ các khóa miễn phí,
-            sau đó nâng cấp lên Pro khi sẵn sàng.
+            Chọn khóa học phù hợp với nhu cầu của bạn – bắt đầu từ các khóa miễn
+            phí, sau đó nâng cấp lên Pro khi sẵn sàng.
           </p>
         </div>
       </div>
@@ -31,5 +31,3 @@ export default function HomeCoursesSection() {
     </section>
   );
 }
-
-

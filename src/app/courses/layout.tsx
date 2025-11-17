@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import Sidebar from "@/components/layout/Sidebar";
+import { useStoredUser } from "@/hooks/useStoredUser";
 
 export default function RootLayout({
   children,
@@ -9,11 +10,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   const [collapsed, setCollapsed] = useState(false);
+  const { user } = useStoredUser();
+
+  const userName = user?.name || user?.email || "User";
 
   return (
     <div className="bg-white dark:bg-slate-950 min-h-screen">
       {/* Sidebar cố định */}
-      <Sidebar onCollapse={setCollapsed} />
+      <Sidebar onCollapse={setCollapsed} userName={userName} />
       {/* Nội dung tự co giãn theo sidebar */}
       <main
         className={

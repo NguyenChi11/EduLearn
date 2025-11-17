@@ -62,7 +62,7 @@ export default function InstructorsSection() {
           >
             {pages.map((page, pageIndex) => (
               <div key={pageIndex} className="flex min-w-full gap-4">
-                {page.map((instructor) => {
+                {page.map((instructor, indexInPage) => {
                   const initial = instructor.name.charAt(0).toUpperCase();
 
                   return (
@@ -72,7 +72,9 @@ export default function InstructorsSection() {
                       onClick={() =>
                         router.push(`/Instructor/${instructor.id}`)
                       }
-                      className="flex-1 cursor-pointer text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-50"
+                      className={`flex-1 cursor-pointer text-left focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-500 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-50 ${
+                        indexInPage === 1 ? "hidden sm:block" : ""
+                      } ${indexInPage === 2 ? "hidden lg:block" : ""}`}
                     >
                       <Card className="flex h-full flex-col items-center bg-white/80 p-5 text-center shadow-sm transition-all duration-200 hover:-translate-y-1 hover:shadow-md dark:bg-slate-900/80">
                         {/* Avatar: ưu tiên ảnh, nếu không có thì hiển thị chữ cái đầu */}
