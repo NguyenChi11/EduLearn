@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import Typography from "@/components/ui/Typography";
 import SectionBox from "@/components/ui/SectionBox";
 
@@ -19,13 +20,12 @@ export default function InstructorAssignmentManagePage() {
 
         <SectionBox title="Bài tập (demo)">
           <p className="text-sm text-slate-600 dark:text-slate-300">
-            Bạn có thể xây dựng danh sách bài tập theo khóa học tại đây (ví
-            dụ: bảng gồm tên bài tập, thuộc khóa học nào, hạn nộp, trạng thái,
-            số lượng học viên đã nộp, v.v).
+            Bạn có thể xây dựng danh sách bài tập theo khóa học tại đây (ví dụ:
+            bảng gồm tên bài tập, thuộc khóa học nào, hạn nộp, trạng thái, số
+            lượng học viên đã nộp, v.v).
           </p>
         </SectionBox>
       </div>
     </div>
   );
 }
-

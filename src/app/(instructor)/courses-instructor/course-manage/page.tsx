@@ -1,6 +1,7 @@
 "use client";
 
 import { useMemo } from "react";
+import React from "react";
 
 import { useInstructor } from "@/contexts/InstructorContext";
 import { getInstructorCourses } from "@/utils/instructor-course-utils";
@@ -69,4 +70,3 @@ export default function InstructorCourseManagePage() {
     </div>
   );
 }
-

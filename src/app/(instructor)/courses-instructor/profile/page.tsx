@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import Typography from "@/components/ui/Typography";
 import SectionBox from "@/components/ui/SectionBox";
 import { useInstructor } from "@/contexts/InstructorContext";
@@ -15,8 +16,8 @@ export default function InstructorProfilePage() {
             Hồ sơ giảng viên
           </Typography>
           <Typography variant="p" className="max-w-2xl">
-            Cập nhật thông tin cá nhân, giới thiệu bản thân và thương hiệu
-            giảng dạy của bạn.
+            Cập nhật thông tin cá nhân, giới thiệu bản thân và thương hiệu giảng
+            dạy của bạn.
           </Typography>
         </header>
 
@@ -36,4 +37,3 @@ export default function InstructorProfilePage() {
     </div>
   );
 }
-

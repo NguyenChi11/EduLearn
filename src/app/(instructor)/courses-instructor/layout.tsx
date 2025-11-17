@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import React, { useState } from "react";
 
 import InstructorAreaGuard from "@/components/(instructor)/InstructorAreaGuard";
 import { useInstructor } from "@/contexts/InstructorContext";
@@ -36,4 +36,3 @@ export default function InstructorCoursesLayout({
     </InstructorAreaGuard>
   );
 }
-

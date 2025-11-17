@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 
 import { useInstructor } from "@/contexts/InstructorContext";
 import { getInstructorCourses } from "@/utils/instructor-course-utils";

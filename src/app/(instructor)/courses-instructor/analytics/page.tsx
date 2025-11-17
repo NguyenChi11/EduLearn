@@ -1,6 +1,7 @@
 "use client";
 
 import { BarChart3, Users } from "lucide-react";
+import React from "react";
 
 import Typography from "@/components/ui/Typography";
 import SectionBox from "@/components/ui/SectionBox";

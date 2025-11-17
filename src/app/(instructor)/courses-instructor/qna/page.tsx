@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import Typography from "@/components/ui/Typography";
 import SectionBox from "@/components/ui/SectionBox";
 
@@ -28,4 +29,3 @@ export default function InstructorQnaPage() {
     </div>
   );
 }
-
