@@ -310,7 +310,6 @@ export default function Header({ user, onLogout }: HeaderProps) {
                     className="hidden md:inline-flex items-center gap-2 text-red-600 hover:text-red-700 hover:bg-red-50 dark:text-red-400 dark:hover:text-red-300 dark:hover:bg-red-900/20"
                   >
                     <Icon icon={LogOut} size="sm" />
-                    <span>Đăng xuất</span>
                   </Button>
 
                   {/* Logout Button (Mobile) */}
