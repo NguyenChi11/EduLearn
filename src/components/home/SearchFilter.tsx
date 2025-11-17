@@ -149,9 +149,6 @@ export default function SearchFilter({
         <div className="mt-1 flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-end md:ml-4">
           {/* Sort segmented control (no native select) */}
           <div className="flex items-center gap-2">
-            <Label className="hidden sm:block text-xs md:text-sm text-slate-600 dark:text-slate-400 whitespace-nowrap">
-              Sắp xếp
-            </Label>
             <div
               className="inline-flex items-center rounded-full border border-slate-200/80 dark:border-slate-700/80 bg-slate-50/60 dark:bg-slate-900/60 p-0.5 shadow-sm backdrop-blur-sm"
               role="listbox"
