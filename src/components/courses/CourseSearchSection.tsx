@@ -29,10 +29,10 @@ export default function CourseSearchSection({
 }: CourseSearchSectionProps) {
   return (
     <>
-      <h1 className="text-3xl font-bold mb-2 text-slate-900 dark:text-white">
+      <h1 className="text-2xl sm:text-3xl font-bold mb-2 sm:mb-3 text-slate-900 dark:text-white">
         Khám phá khóa học
       </h1>
-      <p className="text-slate-600 dark:text-slate-400 mb-6">
+      <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400 mb-4 sm:mb-6">
         Chọn từ {totalCourses} khóa học chất lượng cao
       </p>
       <SearchFilter
@@ -43,7 +43,7 @@ export default function CourseSearchSection({
         sortBy={sortBy}
         onSortChange={onSortChange}
       />
-      <p className="text-sm text-slate-600 dark:text-slate-400 mt-6">
+      <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 mt-4 sm:mt-6">
         Tìm thấy {coursesFound} khóa học
       </p>
     </>

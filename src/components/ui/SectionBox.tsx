@@ -8,18 +8,30 @@ interface SectionBoxProps {
   extra?: React.ReactNode;
 }
 
-export default function SectionBox({ children, className = "", title, extra }: SectionBoxProps) {
+export default function SectionBox({
+  children,
+  className = "",
+  title,
+  extra,
+}: SectionBoxProps) {
   return (
-    <div className={cn("border border-slate-200 dark:border-slate-800 rounded-lg bg-white dark:bg-slate-900 mb-8", className)}>
+    <div
+      className={cn(
+        "border border-slate-200 dark:border-slate-800 rounded-lg bg-white dark:bg-slate-900 mb-6 sm:mb-8",
+        className
+      )}
+    >
       {(title || extra) && (
-        <div className="p-6 border-b border-slate-200 dark:border-slate-800 flex items-start justify-between gap-4">
+        <div className="p-4 sm:p-6 border-b border-slate-200 dark:border-slate-800 flex items-start justify-between gap-4">
           {title && (
-            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-0">{title}</h3>
+            <h3 className="text-xl font-bold text-slate-900 dark:text-white mb-0 xsm:text-base">
+              {title}
+            </h3>
           )}
           {extra}
         </div>
       )}
-      <div className="p-6">{children}</div>
+      <div className="p-4 sm:p-6">{children}</div>
     </div>
   );
 }

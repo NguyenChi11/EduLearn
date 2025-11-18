@@ -147,6 +147,7 @@ export default function InstructorDetailPage() {
                   instructor={course.instructor}
                   enrolledCount={course.enrolledCount}
                   rating={course.rating}
+                  detailHref={`/courses/my-courses/${course.id}`}
                 />
               ))}
             </div>
@@ -156,5 +157,3 @@ export default function InstructorDetailPage() {
     </main>
   );
 }
-
-

@@ -87,7 +87,7 @@ export default function CourseCard({
       </div>
 
       {/* Header */}
-      <div className="flex flex-col space-y-1.5 p-6 flex-1 border-b border-slate-200 dark:border-slate-800">
+      <div className="flex flex-col space-y-1 sm:space-y-1.5 p-4 sm:p-6 flex-1 border-b border-slate-200 dark:border-slate-800">
         <div className="flex items-start justify-between gap-2 mb-2 flex-wrap">
           <span
             className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-xs font-semibold ${levelColor}`}
@@ -100,17 +100,17 @@ export default function CourseCard({
             {kindOfCourse}
           </span>
         </div>
-        <h3 className="text-lg font-semibold leading-none tracking-tight line-clamp-2 text-balance">
+        <h3 className="text-base sm:text-lg font-semibold leading-snug tracking-tight line-clamp-2 text-balance">
           {title}
         </h3>
-        <p className="text-sm text-slate-600 dark:text-slate-400 line-clamp-2 mt-2">
+        <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400 line-clamp-2 mt-1.5 sm:mt-2">
           {description}
         </p>
       </div>
 
       {/* Content */}
-      <div className="p-6 pt-4 space-y-3">
-        <div className="flex items-center justify-between text-sm text-slate-600 dark:text-slate-400 flex-wrap gap-2">
+      <div className="p-4 sm:p-6 pt-3 sm:pt-4 space-y-3">
+        <div className="flex items-center justify-between text-xs sm:text-sm text-slate-600 dark:text-slate-400 flex-wrap gap-2">
           <div className="flex items-center gap-1">
             <Star
               className="w-4 h-4 fill-yellow-400 text-yellow-400"
@@ -144,7 +144,7 @@ export default function CourseCard({
       </div>
 
       {/* Footer */}
-      <div className="flex items-center p-6 pt-0">
+      <div className="flex items-center p-4 sm:p-6 pt-0">
         <Link href={detailHref ?? `/courses/${id}`} className="w-full">
           <Button
             variant={progress > 0 ? "secondary" : "primary"}
