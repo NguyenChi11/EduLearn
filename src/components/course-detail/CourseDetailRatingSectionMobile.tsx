@@ -10,15 +10,15 @@ import {
   setUserCourseRating,
 } from "@/utils/rating-utils";
 
-interface CourseDetailRatingSectionProps {
+interface CourseDetailRatingSectionMobileProps {
   course: Course;
   userId: string;
 }
 
-export default function CourseDetailRatingSection({
+export default function CourseDetailRatingSectionMobile({
   course,
   userId,
-}: CourseDetailRatingSectionProps) {
+}: CourseDetailRatingSectionMobileProps) {
   const [rating, setRating] = useState<number>(0);
 
   useEffect(() => {
@@ -34,37 +34,35 @@ export default function CourseDetailRatingSection({
 
   return (
     <SectionBox
-      title="Đánh giá khóa học này"
+      className="md:hidden"
+      title="Đánh giá nhanh"
       extra={
-        <span className="text-xs text-slate-500 dark:text-slate-400">
-          Đánh giá của bạn giúp giảng viên cải thiện nội dung và trải nghiệm học
-          tập.
+        <span className="text-[11px] text-slate-500 dark:text-slate-400">
+          Chạm vào sao để đánh giá khóa học.
         </span>
       }
     >
-      <div className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between">
-        <div className="min-w-0 flex-1">
-          <Typography
-            variant="p"
-            className="text-sm text-slate-700 dark:text-slate-300"
-          >
-            Bạn thấy khóa{" "}
-            <span className="font-semibold text-slate-900 dark:text-slate-50">
-              {course.title}
-            </span>{" "}
-            như thế nào?
-          </Typography>
-          {rating > 0 && (
-            <p className="mt-1 text-xs text-slate-500 dark:text-slate-400">
-              Bạn đã đánh giá:{" "}
-              <span className="font-medium text-slate-900 dark:text-slate-50">
-                {rating}/5
-              </span>
-              . Bạn có thể thay đổi đánh giá bất kỳ lúc nào.
-            </p>
-          )}
-        </div>
-        <div className="mt-1 flex items-center gap-1 md:mt-0">
+      <div className="flex flex-col gap-3">
+        <Typography
+          variant="p"
+          className="text-sm text-slate-700 dark:text-slate-300"
+        >
+          Bạn thấy khóa{" "}
+          <span className="font-semibold text-slate-900 dark:text-slate-50">
+            {course.title}
+          </span>{" "}
+          như thế nào?
+        </Typography>
+        {rating > 0 && (
+          <p className="text-xs text-slate-500 dark:text-slate-400">
+            Bạn đã đánh giá:{" "}
+            <span className="font-medium text-slate-900 dark:text-slate-50">
+              {rating}/5
+            </span>
+            .
+          </p>
+        )}
+        <div className="mt-1 flex items-center justify-center gap-1">
           {[1, 2, 3, 4, 5].map((value) => (
             <button
               key={value}
@@ -74,7 +72,7 @@ export default function CourseDetailRatingSection({
             >
               <Star
                 className={cn(
-                  "h-5 w-5 sm:h-6 sm:w-6 transition",
+                  "h-6 w-6 transition",
                   value <= rating
                     ? "fill-yellow-400 text-yellow-400"
                     : "text-slate-300 hover:fill-yellow-200 hover:text-yellow-300 dark:text-slate-600"

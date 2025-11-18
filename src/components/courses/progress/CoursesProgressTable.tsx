@@ -27,18 +27,18 @@ export default function CoursesProgressTable({
     <SectionBox
       title="Tiến độ theo từng khóa học"
       extra={
-        <span className="text-sm text-slate-500">
+        <span className="text-xs sm:text-sm text-slate-500">
           {enrolledCoursesCount} khóa đã ghi danh
         </span>
       }
     >
-      <div className="space-y-4">
+      <div className="space-y-3 sm:space-y-4">
         {displayCourses.map((item) => (
           <Card
             key={item.course.id}
             className="flex flex-col gap-3 md:flex-row md:items-center md:justify-between"
           >
-            <div className="flex-1 space-y-2">
+            <div className="flex-1 space-y-1.5 sm:space-y-2">
               <Typography
                 variant="h3"
                 as="h3"
@@ -46,8 +46,8 @@ export default function CoursesProgressTable({
               >
                 {item.course.title}
               </Typography>
-              <div className="space-y-1 text-sm text-slate-600 dark:text-slate-400">
-                <div className="flex items-center justify-between gap-3">
+              <div className="space-y-1 text-xs sm:text-sm text-slate-600 dark:text-slate-400">
+                <div className="flex items-center justify-between gap-2 sm:gap-3">
                   <span>
                     Bài học:{" "}
                     <span className="font-medium">
@@ -62,7 +62,7 @@ export default function CoursesProgressTable({
                   </span>
                 </div>
                 <div className="space-y-1 pt-1">
-                  <div className="flex items-center justify-between text-xs">
+                  <div className="flex items-center justify-between text-[11px] sm:text-xs">
                     <span className="text-slate-500">Tiến độ khóa học</span>
                     <span className="font-medium">{item.progress}%</span>
                   </div>

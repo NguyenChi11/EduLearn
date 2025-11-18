@@ -17,13 +17,13 @@ export default function MyCoursesCompletedSection({
     <SectionBox
       title="Đã hoàn thành"
       extra={
-        <div className="flex items-center gap-2 text-sm text-emerald-600 dark:text-emerald-400">
+        <div className="flex items-center gap-2 text-xs sm:text-sm text-emerald-600 dark:text-emerald-400">
           <CheckCircle2 className="h-4 w-4" />
           <span>Bạn đã hoàn thành {completedCourses.length} khóa học 🎉</span>
         </div>
       }
     >
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {completedCourses.map(({ course }) => (
           <CourseCard
             key={course.id}

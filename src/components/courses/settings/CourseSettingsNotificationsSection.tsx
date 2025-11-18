@@ -23,17 +23,17 @@ export default function CourseSettingsNotificationsSection({
     <SectionBox
       title="Thông báo"
       extra={
-        <div className="flex items-center gap-2 text-sm text-slate-500">
+        <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-500">
           <Bell className="h-4 w-4" />
           <span>Quản lý cách bạn nhận thông báo từ EduLearn</span>
         </div>
       }
     >
       <div className="space-y-4">
-        <div className="flex items-start justify-between gap-4">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
           <div>
             <Label className="mb-1">Email thông báo học tập</Label>
-            <p className="text-sm text-slate-500">
+            <p className="text-xs sm:text-sm text-slate-500">
               Nhận email khi có bài mới, nhắc nhở hoàn thành bài học hoặc cập
               nhật quan trọng từ khoá học.
             </p>
@@ -71,10 +71,10 @@ export default function CourseSettingsNotificationsSection({
             hint="Dùng để hiển thị nhắc nhở trong ứng dụng (không gửi email)."
           />
 
-          <div className="flex items-start justify-between gap-4">
+          <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
             <div>
               <Label className="mb-1">Email giới thiệu khoá học mới</Label>
-              <p className="text-sm text-slate-500">
+              <p className="text-xs sm:text-sm text-slate-500">
                 Nhận email khi có khoá học phù hợp với lĩnh vực bạn quan tâm.
               </p>
             </div>

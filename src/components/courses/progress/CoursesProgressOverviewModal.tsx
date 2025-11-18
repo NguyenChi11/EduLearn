@@ -80,15 +80,15 @@ export default function CoursesProgressOverviewModal({
   if (!type) return null;
 
   return (
-    <div className="fixed inset-0 z-50 m-0 flex items-center justify-center bg-slate-900/70 backdrop-blur-sm">
+    <div className="fixed inset-0 z-50 m-0 flex items-center justify-center bg-slate-900/70 backdrop-blur-sm px-3 sm:px-4">
       <div className="m-0 flex max-h-[90vh] w-full max-w-4xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl ring-1 ring-slate-900/10 dark:bg-slate-950 dark:ring-slate-800">
-        <div className="flex items-start justify-between gap-3 border-b border-slate-200 bg-slate-50 px-5 py-4 dark:border-slate-800 dark:bg-slate-900/60">
+        <div className="flex items-start justify-between gap-3 border-b border-slate-200 bg-slate-50 px-4 py-3 md:px-5 md:py-4 dark:border-slate-800 dark:bg-slate-900/60">
           <div className="space-y-1">
-            <Typography variant="h3" as="h2">
+            <Typography variant="h3" as="h2" className="text-base sm:text-lg">
               {title}
             </Typography>
             {subtitle && (
-              <p className="text-xs text-slate-500 dark:text-slate-400">
+              <p className="text-[11px] sm:text-xs text-slate-500 dark:text-slate-400">
                 {subtitle}
               </p>
             )}
@@ -102,13 +102,13 @@ export default function CoursesProgressOverviewModal({
           </button>
         </div>
 
-        <div className="flex-1 space-y-4 overflow-y-auto px-5 py-4 text-sm md:px-6 md:py-5">
+        <div className="flex-1 space-y-3 overflow-y-auto px-4 py-3 text-xs sm:text-sm md:px-6 md:py-5">
           {modalItems.length === 0 ? (
             <p className="text-sm text-slate-500 dark:text-slate-400">
               Hiện chưa có dữ liệu trong mục này.
             </p>
           ) : (
-            <div className="space-y-3">
+            <div className="space-y-2.5 sm:space-y-3">
               {modalItems.map((item) => (
                 <button
                   key={item.course.id}

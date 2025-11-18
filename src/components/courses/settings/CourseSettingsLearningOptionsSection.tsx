@@ -20,17 +20,17 @@ export default function CourseSettingsLearningOptionsSection({
     <SectionBox
       title="Tùy chọn học"
       extra={
-        <div className="flex items-center gap-2 text-sm text-slate-500">
+        <div className="flex items-center gap-2 text-xs sm:text-sm text-slate-500">
           <BookOpenCheck className="h-4 w-4" />
           <span>Điều chỉnh cách phát bài và hiển thị nội dung</span>
         </div>
       }
     >
       <div className="space-y-4">
-        <div className="flex items-start justify-between gap-4">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
           <div>
             <Label className="mb-1">Tự động chuyển sang bài tiếp theo</Label>
-            <p className="text-sm text-slate-500">
+            <p className="text-xs sm:text-sm text-slate-500">
               Sau khi hoàn thành một bài học, tự động chuyển sang bài kế tiếp
               trong khoá học.
             </p>
@@ -53,10 +53,10 @@ export default function CourseSettingsLearningOptionsSection({
           </button>
         </div>
 
-        <div className="flex items-start justify-between gap-4">
+        <div className="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between sm:gap-4">
           <div>
             <Label className="mb-1">Luôn hiển thị phụ đề (nếu có)</Label>
-            <p className="text-sm text-slate-500">
+            <p className="text-xs sm:text-sm text-slate-500">
               Bật sẵn phụ đề để giúp bạn theo dõi nội dung tốt hơn.
             </p>
           </div>

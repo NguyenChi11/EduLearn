@@ -12,12 +12,14 @@ import BackButton from "@/components/ui/BackButton";
 import SectionBox from "@/components/ui/SectionBox";
 import PrimaryButton from "@/components/ui/PrimaryButton";
 import LessonInfo from "@/components/lesson-detail/LessonInfo";
+import LessonInfoMobile from "@/components/lesson-detail/LessonInfoMobile";
 import LessonContent from "@/components/lesson-detail/LessonContent";
 import LessonNotes from "@/components/lesson-detail/LessonNotes";
 import LessonCompletedMessage from "@/components/lesson-detail/LessonCompletedMessage";
 import ConfirmPopup from "@/components/ui/ConfirmPopup";
 import SuccessPopup from "@/components/ui/SuccessPopup";
 import LessonQnA from "@/components/lesson-detail/LessonQnA";
+import LessonQnAMobile from "@/components/lesson-detail/LessonQnAMobile";
 
 type LessonStatus = "not-started" | "completed";
 
@@ -88,8 +90,10 @@ export default function LessonDetailMyCoursesPage() {
   // Loading UI
   if (isLoading) {
     return (
-      <main className="flex-1 flex items-center justify-center p-6">
-        <p className="text-slate-600 dark:text-slate-400">Đang tải...</p>
+      <main className="flex-1 flex items-center justify-center p-4 md:p-6 lg:p-8">
+        <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400">
+          Đang tải...
+        </p>
       </main>
     );
   }
@@ -97,8 +101,8 @@ export default function LessonDetailMyCoursesPage() {
   // Not found
   if (!lesson || !user) {
     return (
-      <main className="flex-1 flex items-center justify-center p-6">
-        <p className="text-slate-600 dark:text-slate-400">
+      <main className="flex-1 flex items-center justify-center p-4 md:p-6 lg:p-8">
+        <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400">
           Không tìm thấy bài học
         </p>
       </main>
@@ -108,24 +112,27 @@ export default function LessonDetailMyCoursesPage() {
   const isCompleted = status === "completed";
 
   return (
-    <main className="flex-1 overflow-auto p-4 md:p-8">
+    <main className="flex-1 overflow-auto p-4 md:p-6 lg:p-8">
       {/* Back */}
       <BackButton
         onClick={() => router.push(`/courses/my-courses/${courseId}`)}
       />
 
       {/* Video */}
-      <div className="mb-8">
-        <div className="bg-slate-900 dark:bg-black rounded-lg overflow-hidden mb-6 aspect-video flex items-center justify-center">
-          <div className="text-white text-center">
-            <div className="text-6xl mb-4">🎬</div>
-            <p>Video bài học</p>
+      <div className="mb-6 sm:mb-8">
+        <div className="bg-slate-900 dark:bg-black rounded-lg overflow-hidden mb-4 sm:mb-6 aspect-video flex items-center justify-center">
+          <div className="text-white text-center px-4">
+            <div className="text-4xl sm:text-5xl mb-3 sm:mb-4">🎬</div>
+            <p className="text-sm sm:text-base">Video bài học</p>
           </div>
         </div>
       </div>
 
       <SectionBox>
-        <LessonInfo lesson={lesson} status={status} />
+        <LessonInfoMobile lesson={lesson} status={status} />
+        <div className="hidden md:block">
+          <LessonInfo lesson={lesson} status={status} />
+        </div>
       </SectionBox>
 
       <SectionBox>
@@ -137,10 +144,16 @@ export default function LessonDetailMyCoursesPage() {
       </SectionBox>
 
       <SectionBox>
-        <LessonQnA
+        <LessonQnAMobile
           lessonTitle={lesson.title}
           userName={user.name || user.email}
         />
+        <div className="hidden md:block">
+          <LessonQnA
+            lessonTitle={lesson.title}
+            userName={user.name || user.email}
+          />
+        </div>
       </SectionBox>
 
       {/* Button/Completed logic */}

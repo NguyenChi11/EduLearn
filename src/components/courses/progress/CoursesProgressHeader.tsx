@@ -8,10 +8,10 @@ export default function CoursesProgressHeader() {
   return (
     <div className="flex flex-wrap items-start justify-between gap-4">
       <div className="space-y-2">
-        <Typography variant="h2" as="h1">
+        <Typography variant="h2" as="h1" className="text-2xl md:text-3xl">
           Tiến độ học tập
         </Typography>
-        <Typography variant="p" className="max-w-2xl">
+        <Typography variant="p" className="max-w-2xl text-sm sm:text-base">
           Xem tổng quan quá trình học của bạn: số khóa đã ghi danh, bài học đã
           hoàn thành và thời lượng đã học trên EduLearn.
         </Typography>

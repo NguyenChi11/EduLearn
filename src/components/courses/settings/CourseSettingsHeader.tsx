@@ -16,17 +16,17 @@ export default function CourseSettingsHeader({
   onReset,
 }: CourseSettingsHeaderProps) {
   return (
-    <div className="flex items-start justify-between gap-4">
+    <div className="flex flex-wrap items-start justify-between gap-4">
       <div className="space-y-2">
-        <Typography variant="h2" as="h1">
+        <Typography variant="h2" as="h1" className="text-2xl md:text-3xl">
           Cài đặt học tập
         </Typography>
-        <Typography variant="p" className="max-w-2xl">
+        <Typography variant="p" className="max-w-2xl text-sm sm:text-base">
           Tuỳ chỉnh trải nghiệm học tập của bạn trên EduLearn: thông báo, tự
           động phát bài, mục tiêu học mỗi tuần và hơn thế nữa.
         </Typography>
       </div>
-      <div className="flex flex-col gap-2 shrink-0">
+      <div className="hidden flex-col gap-2 shrink-0 sm:flex">
         <PrimaryButton
           type="button"
           className="flex items-center justify-center gap-2 px-4 py-2"

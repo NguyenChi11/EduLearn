@@ -60,13 +60,13 @@ export default function LessonQnA({ lessonTitle, userName }: LessonQnAProps) {
       <Typography
         variant="h3"
         as="h2"
-        className="text-lg font-semibold text-slate-900 dark:text-white"
+        className="text-base sm:text-lg font-semibold text-slate-900 dark:text-white"
       >
         Hỏi giảng viên
       </Typography>
 
       <Card className="space-y-4 bg-slate-50/80 dark:bg-slate-900/80">
-        <p className="text-sm text-slate-600 dark:text-slate-400">
+        <p className="text-xs sm:text-sm text-slate-600 dark:text-slate-400">
           Bạn có thắc mắc về bài học{" "}
           <span className="font-medium text-slate-900 dark:text-slate-100">
             {lessonTitle}

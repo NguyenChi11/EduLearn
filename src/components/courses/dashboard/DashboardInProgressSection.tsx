@@ -21,11 +21,11 @@ export default function DashboardInProgressSection({
           href="/courses/my-courses"
           className="text-sm font-medium text-blue-600 hover:underline"
         >
-          Xem tất cả khóa của tôi
+          Xem thêm
         </Link>
       }
     >
-      <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2 lg:grid-cols-3">
         {inProgressCourses.slice(0, 4).map(({ course, progress }) => (
           <div
             key={course.id}

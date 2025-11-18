@@ -122,9 +122,9 @@ export default function CourseSettingsPage() {
 
   if (!user || !settings) {
     return (
-      <div className="min-h-screen bg-slate-50 dark:bg-slate-950 px-4 py-6 md:px-6 lg:px-8">
+      <div className="min-h-screen bg-slate-50 dark:bg-slate-950 px-4 py-4 md:py-6 md:px-6 lg:px-8">
         <div className="mx-auto w-full max-w-3xl">
-          <Typography variant="h2" as="h1">
+          <Typography variant="h2" as="h1" className="text-xl md:text-2xl">
             Đang tải cài đặt...
           </Typography>
         </div>
@@ -133,8 +133,8 @@ export default function CourseSettingsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 px-4 py-6 md:px-6 lg:px-8">
-      <div className="mx-auto w-full max-w-3xl space-y-8">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 px-4 py-4 md:py-6 md:px-6 lg:px-8">
+      <div className="mx-auto w-full max-w-3xl space-y-6 md:space-y-8">
         {/* Header */}
         <CourseSettingsHeader
           isSaving={isSaving}
@@ -163,19 +163,19 @@ export default function CourseSettingsPage() {
         />
 
         {/* Footer actions (mobile) */}
-        <div className="flex justify-end gap-3 pt-2">
+        <div className="flex flex-col-reverse gap-2 pt-2 sm:hidden">
           <Button
             type="button"
             variant="ghost"
             onClick={handleReset}
-            className="flex items-center gap-1 text-sm text-slate-500"
+            className="flex items-center justify-center gap-1 text-xs text-slate-500"
           >
             <RotateCcw className="w-4 h-4" />
             <span>Khôi phục mặc định</span>
           </Button>
           <PrimaryButton
             type="button"
-            className="flex items-center justify-center gap-2 px-6"
+            className="flex w-full items-center justify-center gap-2 px-4 py-2 text-sm"
             onClick={handleSave}
             disabled={isSaving}
           >

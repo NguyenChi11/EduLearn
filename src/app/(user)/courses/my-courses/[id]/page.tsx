@@ -12,8 +12,10 @@ import BackButton from "@/components/ui/BackButton";
 import CourseHero from "@/components/course-detail/CourseHero";
 import CourseStats from "@/components/course-detail/CourseStats";
 import CourseDetailRatingSection from "@/components/course-detail/CourseDetailRatingSection";
+import CourseDetailRatingSectionMobile from "@/components/course-detail/CourseDetailRatingSectionMobile";
 import LessonList from "@/components/course-detail/LessonList";
 import CourseInstructorInfo from "@/components/course-detail/CourseInstructorInfo";
+import CourseInstructorInfoMobile from "@/components/course-detail/CourseInstructorInfoMobile";
 import SectionBox from "@/components/ui/SectionBox";
 import CourseCard from "@/components/courses/CourseCard";
 
@@ -92,8 +94,8 @@ export default function MyCourseDetailPage() {
 
   if (!user || !course) {
     return (
-      <main className="flex-1 flex items-center justify-center p-6">
-        <p className="text-slate-600 dark:text-slate-400">
+      <main className="flex-1 flex items-center justify-center p-4 md:p-6 lg:p-8">
+        <p className="text-sm sm:text-base text-slate-600 dark:text-slate-400">
           Không tìm thấy khóa học
         </p>
       </main>
@@ -101,7 +103,7 @@ export default function MyCourseDetailPage() {
   }
 
   return (
-    <main className="flex-1 overflow-auto p-4 md:p-8">
+    <main className="flex-1 overflow-auto p-4 md:p-6 lg:p-8">
       <BackButton onClick={() => router.push(`/courses/my-courses`)} />
       <CourseHero
         title={course.title}
@@ -111,8 +113,11 @@ export default function MyCourseDetailPage() {
         rating={course.rating}
       />
       {/* Thông tin giảng viên đặt ở đầu trang, ngay dưới phần hero */}
-      <div className="mb-6">
-        <CourseInstructorInfo course={course} />
+      <div className="mb-4 sm:mb-6">
+        <CourseInstructorInfoMobile course={course} />
+        <div className="hidden md:block">
+          <CourseInstructorInfo course={course} />
+        </div>
       </div>
       <CourseStats
         totalLessons={totalLessons}
@@ -120,10 +125,13 @@ export default function MyCourseDetailPage() {
         progress={progress}
       />
       <div className="mt-4">
-        <CourseDetailRatingSection course={course} userId={user.id} />
+        <CourseDetailRatingSectionMobile course={course} userId={user.id} />
+        <div className="hidden md:block">
+          <CourseDetailRatingSection course={course} userId={user.id} />
+        </div>
       </div>
       <section className="mt-2">
-        <h2 className="mb-4 text-2xl font-bold text-slate-900 dark:text-white">
+        <h2 className="mb-3 sm:mb-4 text-xl sm:text-2xl font-bold text-slate-900 dark:text-white">
           Nội dung khóa học
         </h2>
         <LessonList
@@ -134,9 +142,9 @@ export default function MyCourseDetailPage() {
       </section>
 
       {relatedCourses.length > 0 && (
-        <section className="mt-8">
+        <section className="mt-6 sm:mt-8">
           <SectionBox title="Khóa học liên quan">
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {relatedCourses.map((related) => {
                 const totalRelatedLessons =
                   (related.lessons && related.lessons.length) ||

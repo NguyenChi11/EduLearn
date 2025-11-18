@@ -15,12 +15,12 @@ export default function MyCoursesInProgressSection({
     <SectionBox
       title="Đang học"
       extra={
-        <span className="text-sm text-slate-500">
+        <span className="text-xs sm:text-sm text-slate-500">
           {inProgressCourses.length} khóa đang diễn ra
         </span>
       }
     >
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      <div className="grid grid-cols-1 gap-4 sm:gap-6 sm:grid-cols-2 lg:grid-cols-3">
         {inProgressCourses.map(({ course, progress }) => (
           <CourseCard
             key={course.id}

@@ -32,7 +32,7 @@ export default function CoursesProgressStats({
               <BarChart2 className="h-5 w-5" />
             </div>
           </div>
-          <div className="text-3xl font-bold text-slate-900 dark:text-white">
+          <div className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">
             {summary.enrolledCourses}
           </div>
           <span className="text-xs text-slate-500 dark:text-slate-400">
@@ -55,7 +55,7 @@ export default function CoursesProgressStats({
               <LineChart className="h-5 w-5" />
             </div>
           </div>
-          <div className="text-3xl font-bold text-slate-900 dark:text-white">
+          <div className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">
             {summary.totalCompletedLessons}
           </div>
           <span className="text-xs text-slate-500 dark:text-slate-400">
@@ -78,7 +78,7 @@ export default function CoursesProgressStats({
               <Clock className="h-5 w-5" />
             </div>
           </div>
-          <div className="text-xl font-semibold text-slate-900 dark:text-white">
+          <div className="text-lg sm:text-xl font-semibold text-slate-900 dark:text-white">
             {formatMinutes(summary.totalMinutes)}
           </div>
           <span className="text-xs text-slate-500 dark:text-slate-400">
@@ -101,7 +101,7 @@ export default function CoursesProgressStats({
               <BarChart2 className="h-5 w-5" />
             </div>
           </div>
-          <div className="text-3xl font-bold text-slate-900 dark:text-white">
+          <div className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">
             {summary.averageProgress}%
           </div>
           <span className="text-xs text-slate-500 dark:text-slate-400">

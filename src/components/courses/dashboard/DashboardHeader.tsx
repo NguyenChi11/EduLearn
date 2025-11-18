@@ -13,10 +13,10 @@ export default function DashboardHeader({ user }: DashboardHeaderProps) {
   return (
     <div className="flex flex-wrap items-start justify-between gap-4">
       <div className="space-y-2">
-        <Typography variant="h2" as="h1">
+        <Typography variant="h2" as="h1" className="text-2xl md:text-3xl">
           Bảng điều khiển học tập
         </Typography>
-        <Typography variant="p" className="max-w-2xl">
+        <Typography variant="p" className="max-w-2xl text-sm sm:text-base">
           Xin chào,{" "}
           <span className="font-semibold text-slate-900 dark:text-white">
             {user.name || user.email}

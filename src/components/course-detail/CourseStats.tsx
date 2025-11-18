@@ -16,10 +16,17 @@ export default function CourseStats({
   className = "",
 }: CourseStatsProps) {
   return (
-    <div className={cn("border border-slate-200 dark:border-slate-800 rounded-lg p-6 mb-8 bg-white dark:bg-slate-900", className)}>
+    <div
+      className={cn(
+        "border border-slate-200 dark:border-slate-800 rounded-lg p-4 sm:p-6 mb-4 sm:mb-6 md:mb-8 bg-white dark:bg-slate-900",
+        className
+      )}
+    >
       <div className="flex items-center justify-between mb-3">
         <h2 className="font-semibold text-slate-900 dark:text-white">Tiến độ học tập</h2>
-        <span className="text-2xl font-bold text-blue-600 dark:text-blue-400">{progress}%</span>
+        <span className="text-xl sm:text-2xl font-bold text-blue-600 dark:text-blue-400">
+          {progress}%
+        </span>
       </div>
       <ProgressBar value={progress} />
       <p className="text-sm text-slate-600 dark:text-slate-400 mt-3">

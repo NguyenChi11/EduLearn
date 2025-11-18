@@ -76,7 +76,7 @@ export default function DashboardOverviewModal({
 
   return (
     <div className="fixed inset-0 z-50 m-0 flex items-center justify-center bg-slate-900/70 backdrop-blur-sm">
-      <div className="m-0 flex max-h-[90vh] w-full max-w-4xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl ring-1 ring-slate-900/10 dark:bg-slate-950 dark:ring-slate-800">
+      <div className="m-0 flex max-h-[90vh] xsm:m-4 w-full max-w-4xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl ring-1 ring-slate-900/10 dark:bg-slate-950 dark:ring-slate-800 ">
         <div className="flex items-start justify-between gap-3 border-b border-slate-200 bg-slate-50 px-5 py-4 dark:border-slate-800 dark:bg-slate-900/60">
           <div className="space-y-1">
             <Typography variant="h3" as="h2">

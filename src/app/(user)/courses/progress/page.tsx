@@ -145,8 +145,8 @@ export default function CoursesProgressPage() {
   if (!user) return null;
 
   return (
-    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 px-4 py-6 md:px-6 lg:px-8">
-      <div className="mx-auto w-full max-w-6xl space-y-8">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950 px-4 py-4 md:py-6 md:px-6 lg:px-8">
+      <div className="mx-auto w-full max-w-6xl space-y-6 md:space-y-8">
         {/* Header */}
         <CoursesProgressHeader />
 

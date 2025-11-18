@@ -13,7 +13,9 @@ export default function LessonInfo({ lesson, status }: LessonInfoProps) {
   return (
     <div className="flex items-start justify-between gap-4">
       <div>
-        <h1 className="text-2xl font-bold mb-3 text-slate-900 dark:text-white">{lesson.title}</h1>
+        <h1 className="text-2xl md:text-3xl font-bold mb-3 text-slate-900 dark:text-white">
+          {lesson.title}
+        </h1>
         <InfoItem icon={<Clock className="w-4 h-4" />} label="Thời lượng:" value={`${lesson.duration} phút`} />
       </div>
       {isCompleted && <CheckCircle className="w-6 h-6 text-green-500" />}

@@ -34,7 +34,7 @@ export default function DashboardOverviewStats({
               <BookOpen className="h-5 w-5" />
             </div>
           </div>
-          <div className="text-3xl font-bold text-slate-900 dark:text-white">
+          <div className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">
             {totalCourses}
           </div>
           <span className="text-xs text-slate-500 dark:text-slate-400">
@@ -57,7 +57,7 @@ export default function DashboardOverviewStats({
               <BarChart2 className="h-5 w-5" />
             </div>
           </div>
-          <div className="text-3xl font-bold text-slate-900 dark:text-white">
+          <div className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">
             {enrolledCourses}
           </div>
           <span className="text-xs text-slate-500 dark:text-slate-400">
@@ -80,7 +80,7 @@ export default function DashboardOverviewStats({
               <Trophy className="h-5 w-5" />
             </div>
           </div>
-          <div className="text-3xl font-bold text-slate-900 dark:text-white">
+          <div className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">
             {completedCourses}
           </div>
           <span className="text-xs text-slate-500 dark:text-slate-400">
@@ -103,7 +103,7 @@ export default function DashboardOverviewStats({
               <Clock className="h-5 w-5" />
             </div>
           </div>
-          <div className="text-3xl font-bold text-slate-900 dark:text-white">
+          <div className="text-2xl sm:text-3xl font-bold text-slate-900 dark:text-white">
             {averageProgress}%
           </div>
           <span className="text-xs text-slate-500 dark:text-slate-400">
