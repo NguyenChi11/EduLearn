@@ -19,6 +19,13 @@ export interface Course {
   category?: string;
 }
 
+export interface LessonResource {
+  id: string;
+  title: string;
+  url: string;
+  type?: "pdf" | "doc" | "ppt" | "video" | "link" | "other";
+}
+
 export interface Lesson {
   id: string;
   courseId: string;
@@ -28,6 +35,10 @@ export interface Lesson {
   description: string;
   status: "not-started" | "completed";
   order: number;
+  // URL video bài học (ưu tiên dùng nếu có, fallback sang url cũ)
+  videoUrl?: string;
+  // Danh sách tài liệu đính kèm (demo: lưu tĩnh/mock, chưa kết nối backend)
+  attachments?: LessonResource[];
 }
 
 export interface ProgressData {
