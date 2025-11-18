@@ -11,9 +11,13 @@ import { getCourseProgress, getLessonStatus } from "@/utils/progress-utils";
 import BackButton from "@/components/ui/BackButton";
 import CourseHero from "@/components/course-detail/CourseHero";
 import CourseStats from "@/components/course-detail/CourseStats";
+import CourseDetailRatingSection from "@/components/course-detail/CourseDetailRatingSection";
 import LessonList from "@/components/course-detail/LessonList";
+import CourseInstructorInfo from "@/components/course-detail/CourseInstructorInfo";
+import SectionBox from "@/components/ui/SectionBox";
+import CourseCard from "@/components/courses/CourseCard";
 
-export default function CourseDetailPage() {
+export default function MyCourseDetailPage() {
   const router = useRouter();
   const params = useParams();
   const courseId = params.id as string;
@@ -65,6 +69,19 @@ export default function CourseDetailPage() {
     }).length;
   }, [course, courseId, user]);
 
+  // Khóa học liên quan (cùng category hoặc cùng loại khóa, loại trừ chính khóa hiện tại)
+  const relatedCourses: Course[] = useMemo(() => {
+    if (!course) return [];
+
+    return MOCK_COURSES.filter((c) => {
+      if (c.id === course.id) return false;
+      const sameCategory =
+        c.category && course.category && c.category === course.category;
+      const sameKind = c.kindOfCourse === course.kindOfCourse;
+      return sameCategory || sameKind;
+    }).slice(0, 3);
+  }, [course]);
+
   if (isLoading) {
     return (
       <main className="flex-1 flex items-center justify-center p-6">
@@ -85,7 +102,7 @@ export default function CourseDetailPage() {
 
   return (
     <main className="flex-1 overflow-auto p-4 md:p-8">
-      <BackButton onClick={() => router.push(`/courses`)} />
+      <BackButton onClick={() => router.push(`/courses/my-courses`)} />
       <CourseHero
         title={course.title}
         description={course.description}
@@ -93,13 +110,20 @@ export default function CourseDetailPage() {
         level={course.level}
         rating={course.rating}
       />
+      {/* Thông tin giảng viên đặt ở đầu trang, ngay dưới phần hero */}
+      <div className="mb-6">
+        <CourseInstructorInfo course={course} />
+      </div>
       <CourseStats
         totalLessons={totalLessons}
         completedLessons={completedLessons}
         progress={progress}
       />
-      <section>
-        <h2 className="text-2xl font-bold mb-4 text-slate-900 dark:text-white">
+      <div className="mt-4">
+        <CourseDetailRatingSection course={course} userId={user.id} />
+      </div>
+      <section className="mt-2">
+        <h2 className="mb-4 text-2xl font-bold text-slate-900 dark:text-white">
           Nội dung khóa học
         </h2>
         <LessonList
@@ -108,8 +132,38 @@ export default function CourseDetailPage() {
           userId={user.id}
         />
       </section>
+
+      {relatedCourses.length > 0 && (
+        <section className="mt-8">
+          <SectionBox title="Khóa học liên quan">
+            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+              {relatedCourses.map((related) => {
+                const totalRelatedLessons =
+                  (related.lessons && related.lessons.length) ||
+                  related.totalLessons ||
+                  0;
+                const relatedProgress = getCourseProgress(
+                  user.id,
+                  related.id,
+                  totalRelatedLessons
+                );
+
+                return (
+                  <CourseCard
+                    key={related.id}
+                    {...related}
+                    progress={relatedProgress}
+                    rating={related.rating}
+                    enrolledCount={related.enrolledCount}
+                    instructor={related.instructor}
+                    detailHref={`/courses/my-courses/${related.id}`}
+                  />
+                );
+              })}
+            </div>
+          </SectionBox>
+        </section>
+      )}
     </main>
   );
 }
-
-

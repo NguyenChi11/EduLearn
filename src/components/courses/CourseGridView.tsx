@@ -21,6 +21,7 @@ export default function CourseGridView({
             key={course.id}
             {...course}
             progress={getCourseProgress(userId, course.id, totalLessons)}
+            detailHref={`/courses/my-courses/${course.id}`}
           />
         );
       })}

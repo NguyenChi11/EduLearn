@@ -1,27 +1,22 @@
 /* Trang dashboard cho phần Courses */
 "use client";
 
-import { useEffect, useMemo, useState } from "react";
+import { useEffect, useMemo, useState, useCallback } from "react";
 import { useRouter } from "next/navigation";
-import Link from "next/link";
-import { BarChart2, BookOpen, Clock, PlayCircle, Trophy } from "lucide-react";
 
 import { MOCK_COURSES } from "@/data/mock-data";
 import { getStoredUser } from "@/utils/auth-utils";
 import { getCourseProgress } from "@/utils/progress-utils";
-import type { Course } from "@/types/course-type";
 import type { User } from "@/types/user-type";
-import Card from "@/components/ui/Card";
-import Typography from "@/components/ui/Typography";
-import PrimaryButton from "@/components/ui/PrimaryButton";
-import SectionBox from "@/components/ui/SectionBox";
-import CourseCard from "@/components/courses/CourseCard";
-
-interface CourseWithProgress {
-  course: Course;
-  progress: number;
-  totalLessons: number;
-}
+import type {
+  CourseWithProgress,
+  OverviewModalType,
+} from "@/types/courses-dashboard-type";
+import DashboardHeader from "@/components/courses/dashboard/DashboardHeader";
+import DashboardOverviewStats from "@/components/courses/dashboard/DashboardOverviewStats";
+import DashboardInProgressSection from "@/components/courses/dashboard/DashboardInProgressSection";
+import DashboardRecommendedSection from "@/components/courses/dashboard/DashboardRecommendedSection";
+import DashboardOverviewModal from "@/components/courses/dashboard/DashboardOverviewModal";
 
 export default function CoursesDashboardPage() {
   const router = useRouter();
@@ -59,6 +54,8 @@ export default function CoursesDashboardPage() {
     completedCourses,
     inProgressCourses,
     averageProgress,
+    enrolledCourseList,
+    completedCourseList,
   } = useMemo(() => {
     if (!user || courseProgressData.length === 0) {
       return {
@@ -67,6 +64,8 @@ export default function CoursesDashboardPage() {
         completedCourses: 0,
         inProgressCourses: [] as CourseWithProgress[],
         averageProgress: 0,
+        enrolledCourseList: [] as CourseWithProgress[],
+        completedCourseList: [] as CourseWithProgress[],
       };
     }
 
@@ -92,6 +91,8 @@ export default function CoursesDashboardPage() {
       completedCourses: completed.length,
       inProgressCourses: inProgress,
       averageProgress: avg,
+      enrolledCourseList: enrolled,
+      completedCourseList: completed,
     };
   }, [courseProgressData, user]);
 
@@ -104,159 +105,58 @@ export default function CoursesDashboardPage() {
     return notStarted.map((item) => item.course).slice(0, 3);
   }, [courseProgressData, user]);
 
+  const [overviewModal, setOverviewModal] = useState<OverviewModalType | null>(
+    null
+  );
+
+  const handleOpenOverview = useCallback((type: OverviewModalType) => {
+    setOverviewModal(type);
+  }, []);
+
+  const handleCloseOverview = useCallback(() => {
+    setOverviewModal(null);
+  }, []);
+
+  const handleCourseNavigate = useCallback(
+    (courseId: string) => {
+      setOverviewModal(null);
+      router.push(`/courses/my-courses/${courseId}`);
+    },
+    [router]
+  );
+
   if (!user) return null;
 
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 px-4 py-6 md:px-6 lg:px-8">
       <div className="mx-auto w-full max-w-6xl space-y-8">
         {/* Header */}
-        <div className="flex flex-wrap items-start justify-between gap-4">
-          <div className="space-y-2">
-            <Typography variant="h2" as="h1">
-              Bảng điều khiển học tập
-            </Typography>
-            <Typography variant="p" className="max-w-2xl">
-              Xin chào,{" "}
-              <span className="font-semibold text-slate-900 dark:text-white">
-                {user.name || user.email}
-              </span>
-              . Theo dõi tiến độ học tập và tiếp tục các khóa học của bạn tại
-              đây.
-            </Typography>
-          </div>
-
-          <div className="w-full sm:w-auto sm:min-w-[220px]">
-            <Link href="/courses/my-courses">
-              <PrimaryButton className="w-full flex items-center justify-center gap-2">
-                <PlayCircle className="w-5 h-5" />
-                <span>Tiếp tục học</span>
-              </PrimaryButton>
-            </Link>
-          </div>
-        </div>
+        <DashboardHeader user={user} />
 
         {/* Thống kê tổng quan */}
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
-          <Card className="flex flex-col gap-3">
-            <div className="flex items-center justify-between">
-              <span className="text-sm font-medium text-slate-500">
-                Tổng số khóa học
-              </span>
-              <BookOpen className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-            </div>
-            <div className="text-3xl font-bold text-slate-900 dark:text-white">
-              {totalCourses}
-            </div>
-            <span className="text-xs text-slate-500">
-              Tất cả khóa học hiện có trên hệ thống
-            </span>
-          </Card>
-
-          <Card className="flex flex-col gap-3">
-            <div className="flex items-center justify-between">
-              <span className="text-sm font-medium text-slate-500">
-                Đã ghi danh
-              </span>
-              <BarChart2 className="w-5 h-5 text-emerald-600 dark:text-emerald-400" />
-            </div>
-            <div className="text-3xl font-bold text-slate-900 dark:text-white">
-              {enrolledCourses}
-            </div>
-            <span className="text-xs text-slate-500">
-              Khóa học bạn đã bắt đầu học
-            </span>
-          </Card>
-
-          <Card className="flex flex-col gap-3">
-            <div className="flex items-center justify-between">
-              <span className="text-sm font-medium text-slate-500">
-                Hoàn thành
-              </span>
-              <Trophy className="w-5 h-5 text-amber-500 dark:text-amber-400" />
-            </div>
-            <div className="text-3xl font-bold text-slate-900 dark:text-white">
-              {completedCourses}
-            </div>
-            <span className="text-xs text-slate-500">
-              Khóa học đã hoàn thành 100%
-            </span>
-          </Card>
-
-          <Card className="flex flex-col gap-3">
-            <div className="flex items-center justify-between">
-              <span className="text-sm font-medium text-slate-500">
-                Tiến độ trung bình
-              </span>
-              <Clock className="w-5 h-5 text-purple-600 dark:text-purple-400" />
-            </div>
-            <div className="text-3xl font-bold text-slate-900 dark:text-white">
-              {averageProgress}%
-            </div>
-            <span className="text-xs text-slate-500">
-              Trung bình trên tất cả khóa bạn đang học
-            </span>
-          </Card>
-        </div>
+        <DashboardOverviewStats
+          totalCourses={totalCourses}
+          enrolledCourses={enrolledCourses}
+          completedCourses={completedCourses}
+          averageProgress={averageProgress}
+          onOpenOverview={handleOpenOverview}
+        />
 
         {/* Khóa học đang học */}
-        {inProgressCourses.length > 0 && (
-          <SectionBox
-            title="Tiếp tục học"
-            extra={
-              <Link
-                href="/courses/my-courses"
-                className="text-sm font-medium text-blue-600 hover:underline"
-              >
-                Xem tất cả khóa của tôi
-              </Link>
-            }
-          >
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {inProgressCourses.slice(0, 4).map(({ course, progress }) => (
-                <div
-                  key={course.id}
-                  className="flex flex-col md:flex-row items-stretch gap-4"
-                >
-                  <div className="flex-1">
-                    <CourseCard
-                      {...course}
-                      progress={progress}
-                      rating={course.rating}
-                      enrolledCount={course.enrolledCount}
-                      instructor={course.instructor}
-                    />
-                  </div>
-                </div>
-              ))}
-            </div>
-          </SectionBox>
-        )}
+        <DashboardInProgressSection inProgressCourses={inProgressCourses} />
 
         {/* Gợi ý khóa học */}
-        <SectionBox
-          title="Gợi ý cho bạn"
-          extra={
-            <Link
-              href="/courses"
-              className="text-sm font-medium text-blue-600 hover:underline"
-            >
-              Khám phá thêm khóa học
-            </Link>
-          }
-        >
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            {recommendedCourses.map((course) => (
-              <CourseCard
-                key={course.id}
-                {...course}
-                progress={0}
-                rating={course.rating}
-                enrolledCount={course.enrolledCount}
-                instructor={course.instructor}
-              />
-            ))}
-          </div>
-        </SectionBox>
+        <DashboardRecommendedSection courses={recommendedCourses} />
+
+        {/* Popup thống kê tổng quan */}
+        <DashboardOverviewModal
+          type={overviewModal}
+          allCourses={courseProgressData}
+          enrolledCourses={enrolledCourseList}
+          completedCourses={completedCourseList}
+          onClose={handleCloseOverview}
+          onCourseClick={handleCourseNavigate}
+        />
       </div>
     </div>
   );

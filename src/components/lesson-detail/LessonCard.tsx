@@ -61,7 +61,10 @@ export default function LessonCard({
             <span>{duration} phút</span>
           </div>
         </div>
-        <Link href={`/courses/${courseId}/lessons/${id}`} className="block">
+        <Link
+          href={`/courses/my-courses/${courseId}/lessons/${id}`}
+          className="block"
+        >
           <Button
             variant={isCompleted ? "secondary" : "primary"}
             className="w-full"

@@ -17,10 +17,11 @@ import LessonNotes from "@/components/lesson-detail/LessonNotes";
 import LessonCompletedMessage from "@/components/lesson-detail/LessonCompletedMessage";
 import ConfirmPopup from "@/components/ui/ConfirmPopup";
 import SuccessPopup from "@/components/ui/SuccessPopup";
+import LessonQnA from "@/components/lesson-detail/LessonQnA";
 
 type LessonStatus = "not-started" | "completed";
 
-export default function LessonDetailPage() {
+export default function LessonDetailMyCoursesPage() {
   const router = useRouter();
   const params = useParams();
 
@@ -30,7 +31,7 @@ export default function LessonDetailPage() {
   const [lesson, setLesson] = useState<Lesson | null>(null);
   const [user, setUser] = useState<User | null>(null);
   const [status, setStatus] = useState<LessonStatus>("not-started");
-  const [isMarking, setIsMarking] = useState(false);
+  const [isMarking] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [showConfirm, setShowConfirm] = useState(false);
   const [showSuccess, setShowSuccess] = useState(false);
@@ -109,7 +110,9 @@ export default function LessonDetailPage() {
   return (
     <main className="flex-1 overflow-auto p-4 md:p-8">
       {/* Back */}
-      <BackButton onClick={() => router.push(`/courses/${courseId}`)} />
+      <BackButton
+        onClick={() => router.push(`/courses/my-courses/${courseId}`)}
+      />
 
       {/* Video */}
       <div className="mb-8">
@@ -131,6 +134,13 @@ export default function LessonDetailPage() {
 
       <SectionBox>
         <LessonNotes />
+      </SectionBox>
+
+      <SectionBox>
+        <LessonQnA
+          lessonTitle={lesson.title}
+          userName={user.name || user.email}
+        />
       </SectionBox>
 
       {/* Button/Completed logic */}
