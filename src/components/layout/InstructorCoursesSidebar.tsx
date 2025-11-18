@@ -6,8 +6,6 @@ import { useRouter, usePathname } from "next/navigation";
 import {
   BarChart3,
   BookOpen,
-  BookOpenCheck,
-  FileText,
   HelpCircle,
   LayoutList,
   LogOut,
@@ -44,21 +42,6 @@ export default function InstructorCoursesSidebar({
       label: "Danh sách khóa học",
       icon: LayoutList,
       href: "/courses-instructor/course-list",
-    },
-    {
-      label: "Quản lý khóa học",
-      icon: BookOpenCheck,
-      href: "/courses-instructor/course-manage",
-    },
-    {
-      label: "Quản lý nội dung học",
-      icon: FileText,
-      href: "/courses-instructor/content-manage",
-    },
-    {
-      label: "Quản lý bài tập",
-      icon: HelpCircle,
-      href: "/courses-instructor/assignment-manage",
     },
     {
       label: "Quản lý học viên",
