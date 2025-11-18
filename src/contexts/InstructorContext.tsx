@@ -14,6 +14,14 @@ export interface Instructor {
   id: string;
   email: string;
   name: string;
+  avatar?: string;
+  headline?: string;
+  bio?: string;
+  language?: string;
+  website?: string;
+  facebook?: string;
+  linkedin?: string;
+  youtube?: string;
 }
 
 interface InstructorContextValue {
