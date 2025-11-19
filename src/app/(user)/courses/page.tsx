@@ -8,8 +8,8 @@ import { getStoredUser } from "@/utils/auth-utils";
 
 import type { Course } from "@/types/course-type";
 import type { User } from "@/types/user-type";
-import CourseSearchSection from "@/components/courses/CourseSearchSection";
-import CourseGridView from "@/components/courses/CourseGridView";
+import CourseSearchSection from "@/components/(use)/courses/CourseSearchSection";
+import CourseGridView from "@/components/(use)/courses/CourseGridView";
 import Pagination from "@/components/ui/Pagination";
 import { FilterOptions, SortOption } from "@/components/home/SearchFilter";
 

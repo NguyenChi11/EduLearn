@@ -11,15 +11,15 @@ import { getLessonStatus, updateLessonStatus } from "@/utils/progress-utils";
 import BackButton from "@/components/ui/BackButton";
 import SectionBox from "@/components/ui/SectionBox";
 import PrimaryButton from "@/components/ui/PrimaryButton";
-import LessonInfo from "@/components/lesson-detail/LessonInfo";
-import LessonInfoMobile from "@/components/lesson-detail/LessonInfoMobile";
-import LessonContent from "@/components/lesson-detail/LessonContent";
-import LessonNotes from "@/components/lesson-detail/LessonNotes";
-import LessonCompletedMessage from "@/components/lesson-detail/LessonCompletedMessage";
+import LessonInfo from "@/components/(use)/course-detail/lesson-detail/LessonInfo";
+import LessonInfoMobile from "@/components/(use)/course-detail/lesson-detail/LessonInfoMobile";
+import LessonContent from "@/components/(use)/course-detail/lesson-detail/LessonContent";
+import LessonNotes from "@/components/(use)/course-detail/lesson-detail/LessonNotes";
+import LessonCompletedMessage from "@/components/(use)/course-detail/lesson-detail/LessonCompletedMessage";
 import ConfirmPopup from "@/components/ui/ConfirmPopup";
 import SuccessPopup from "@/components/ui/SuccessPopup";
-import LessonQnA from "@/components/lesson-detail/LessonQnA";
-import LessonQnAMobile from "@/components/lesson-detail/LessonQnAMobile";
+import LessonQnA from "@/components/(use)/course-detail/lesson-detail/LessonQnA";
+import LessonQnAMobile from "@/components/(use)/course-detail/lesson-detail/LessonQnAMobile";
 
 type LessonStatus = "not-started" | "completed";
 

@@ -12,11 +12,11 @@ import type {
   CourseWithProgress,
   OverviewModalType,
 } from "@/types/courses-dashboard-type";
-import DashboardHeader from "@/components/courses/dashboard/DashboardHeader";
-import DashboardOverviewStats from "@/components/courses/dashboard/DashboardOverviewStats";
-import DashboardInProgressSection from "@/components/courses/dashboard/DashboardInProgressSection";
-import DashboardRecommendedSection from "@/components/courses/dashboard/DashboardRecommendedSection";
-import DashboardOverviewModal from "@/components/courses/dashboard/DashboardOverviewModal";
+import DashboardHeader from "@/components/(use)/courses/dashboard/DashboardHeader";
+import DashboardOverviewStats from "@/components/(use)/courses/dashboard/DashboardOverviewStats";
+import DashboardInProgressSection from "@/components/(use)/courses/dashboard/DashboardInProgressSection";
+import DashboardRecommendedSection from "@/components/(use)/courses/dashboard/DashboardRecommendedSection";
+import DashboardOverviewModal from "@/components/(use)/courses/dashboard/DashboardOverviewModal";
 
 export default function CoursesDashboardPage() {
   const router = useRouter();

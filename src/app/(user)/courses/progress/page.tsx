@@ -13,11 +13,11 @@ import type {
   CoursesProgressSummary,
   CoursesProgressOverviewType,
 } from "@/types/courses-progress-type";
-import CoursesProgressHeader from "@/components/courses/progress/CoursesProgressHeader";
-import CoursesProgressStats from "@/components/courses/progress/CoursesProgressStats";
-import CoursesProgressEmptyState from "@/components/courses/progress/CoursesProgressEmptyState";
-import CoursesProgressTable from "@/components/courses/progress/CoursesProgressTable";
-import CoursesProgressOverviewModal from "@/components/courses/progress/CoursesProgressOverviewModal";
+import CoursesProgressHeader from "@/components/(use)/courses/progress/CoursesProgressHeader";
+import CoursesProgressStats from "@/components/(use)/courses/progress/CoursesProgressStats";
+import CoursesProgressEmptyState from "@/components/(use)/courses/progress/CoursesProgressEmptyState";
+import CoursesProgressTable from "@/components/(use)/courses/progress/CoursesProgressTable";
+import CoursesProgressOverviewModal from "@/components/(use)/courses/progress/CoursesProgressOverviewModal";
 
 export default function CoursesProgressPage() {
   const router = useRouter();

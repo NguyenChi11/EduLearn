@@ -17,10 +17,10 @@ import Button from "@/components/ui/Button";
 import PrimaryButton from "@/components/ui/PrimaryButton";
 import SuccessPopup from "@/components/ui/SuccessPopup";
 import ConfirmPopup from "@/components/ui/ConfirmPopup";
-import CourseSettingsHeader from "@/components/courses/settings/CourseSettingsHeader";
-import CourseSettingsNotificationsSection from "@/components/courses/settings/CourseSettingsNotificationsSection";
-import CourseSettingsLearningOptionsSection from "@/components/courses/settings/CourseSettingsLearningOptionsSection";
-import CourseSettingsGoalsSection from "@/components/courses/settings/CourseSettingsGoalsSection";
+import CourseSettingsHeader from "@/components/(use)/courses/settings/CourseSettingsHeader";
+import CourseSettingsNotificationsSection from "@/components/(use)/courses/settings/CourseSettingsNotificationsSection";
+import CourseSettingsLearningOptionsSection from "@/components/(use)/courses/settings/CourseSettingsLearningOptionsSection";
+import CourseSettingsGoalsSection from "@/components/(use)/courses/settings/CourseSettingsGoalsSection";
 
 const getSettingsKey = (userId: string) => `course_settings_user_${userId}`;
 

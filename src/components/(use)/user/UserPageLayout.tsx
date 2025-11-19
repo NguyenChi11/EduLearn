@@ -18,7 +18,7 @@ import {
   ProfileTab,
   PhotoTab,
   SecurityTab,
-} from "@/components/user";
+} from "@/components/(use)/user";
 import { useUser } from "@/contexts/UserContext";
 
 type UserTab = "public" | "profile" | "photo" | "security";
@@ -116,5 +116,3 @@ export default function UserPageLayout() {
     </div>
   );
 }
-
-

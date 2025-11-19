@@ -5,14 +5,15 @@ import React, { useCallback, useMemo, useState } from "react";
 import type { Course } from "@/types/course-type";
 import { useInstructor } from "@/contexts/InstructorContext";
 import { getInstructorCourses } from "@/utils/instructor-course-utils";
-import CourseCard from "@/components/courses/CourseCard";
 import SectionBox from "@/components/ui/SectionBox";
-import Typography from "@/components/ui/Typography";
 import SearchFilter, {
   type FilterOptions,
   type SortOption,
 } from "@/components/home/SearchFilter";
-import Pagination from "@/components/ui/Pagination";
+import InstructorCoursePageHeader from "@/components/(instructor)/courses/InstructorCoursePageHeader";
+import InstructorCourseToolbar from "@/components/(instructor)/courses/InstructorCourseToolbar";
+import InstructorCourseMetaModal from "@/components/(instructor)/courses/InstructorCourseMetaModal";
+import InstructorCourseListSection from "@/components/(instructor)/courses/InstructorCourseListSection";
 
 const DEFAULT_SORT: SortOption = "popular";
 const ITEMS_PER_PAGE = 9;
@@ -189,9 +190,9 @@ export default function InstructorCourseListPage() {
   };
 
   // CRUD khóa học
-  const handleChangeCourseForm = <K extends keyof CourseFormState>(
-    key: K,
-    value: CourseFormState[K]
+  const handleChangeCourseForm = (
+    key: keyof CourseFormState,
+    value: string | LevelCode | ""
   ) => {
     setCourseForm((prev) => ({
       ...prev,
@@ -342,61 +343,13 @@ export default function InstructorCourseListPage() {
   return (
     <div className="min-h-screen bg-slate-50 dark:bg-slate-950 px-4 py-6 md:px-6 lg:px-8">
       <div className="mx-auto w-full max-w-6xl space-y-6">
-        <header className="space-y-2">
-          <Typography variant="h2" as="h1">
-            Khóa học của bạn
-          </Typography>
-          <Typography variant="p" className="max-w-2xl">
-            Tìm kiếm và lọc các khóa học mà bạn đang phụ trách. Bạn có thể vào
-            từng khóa để quản lý nội dung, bài tập và học viên.
-          </Typography>
-        </header>
+        <InstructorCoursePageHeader />
 
-        {/* Thanh điều hướng quản lý meta: danh mục, khóa học, mức độ */}
-        <SectionBox>
-          <div className="flex flex-wrap items-center justify-between gap-3">
-            <div className="inline-flex rounded-full border border-slate-200 bg-slate-100 p-1 text-xs shadow-sm dark:border-slate-700 dark:bg-slate-900">
-              <button
-                type="button"
-                onClick={() => openMetaPopup("category")}
-                className={`rounded-full px-4 py-1.5 font-semibold transition ${
-                  activeMetaTab === "category"
-                    ? "bg-white text-slate-900 shadow-sm dark:bg-slate-800 dark:text-white"
-                    : "text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white"
-                }`}
-              >
-                Danh mục khóa học
-              </button>
-              <button
-                type="button"
-                onClick={() => handleStartCreateCourse()}
-                className={`rounded-full px-4 py-1.5 font-semibold transition ${
-                  activeMetaTab === "course"
-                    ? "bg-white text-slate-900 shadow-sm dark:bg-slate-800 dark:text-white"
-                    : "text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white"
-                }`}
-              >
-                Khóa học
-              </button>
-              <button
-                type="button"
-                onClick={() => openMetaPopup("level")}
-                className={`rounded-full px-4 py-1.5 font-semibold transition ${
-                  activeMetaTab === "level"
-                    ? "bg-white text-slate-900 shadow-sm dark:bg-slate-800 dark:text-white"
-                    : "text-slate-600 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white"
-                }`}
-              >
-                Mức độ khóa học
-              </button>
-            </div>
-            <p className="text-[11px] text-slate-500 dark:text-slate-400 max-w-md">
-              Các chức năng trên chỉ là demo UI, dữ liệu được lưu tạm thời trên
-              trình duyệt. Bạn có thể thêm, sửa, xóa danh mục, khóa học và mức
-              độ khóa học tại đây.
-            </p>
-          </div>
-        </SectionBox>
+        {/* Thanh điều hướng chức năng: chỉ thêm/chỉnh sửa khóa học (dành cho giảng viên) */}
+        <InstructorCourseToolbar
+          isCourseTabActive={activeMetaTab === "course"}
+          onAddCourse={handleStartCreateCourse}
+        />
 
         <SectionBox>
           <SearchFilter
@@ -418,367 +371,43 @@ export default function InstructorCourseListPage() {
           />
         </SectionBox>
 
-        {/* Popup meta: danh mục / khóa học / mức độ */}
-        {showMetaPopup && activeMetaTab && (
-          <div className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/60 backdrop-blur-sm m-0">
-            <div className="m-0 flex max-h-[90vh] w-full max-w-3xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl ring-1 ring-slate-900/10 dark:bg-slate-950 dark:ring-slate-800">
-              <div className="flex items-start justify-between gap-3 border-b border-slate-200 bg-slate-50 px-5 py-4 dark:border-slate-800 dark:bg-slate-900/60">
-                <div className="space-y-1">
-                  <Typography variant="h3" as="h2">
-                    {activeMetaTab === "category"
-                      ? "Danh mục khóa học"
-                      : activeMetaTab === "course"
-                      ? editingCourseId
-                        ? "Chỉnh sửa khóa học"
-                        : "Thêm khóa học mới"
-                      : "Mức độ khóa học"}
-                  </Typography>
-                  <p className="text-xs text-slate-500 dark:text-slate-400">
-                    {activeMetaTab === "category" &&
-                      "Thêm, sửa hoặc xóa danh mục khóa học. Mỗi danh mục có thể chứa nhiều khóa học."}
-                    {activeMetaTab === "course" &&
-                      "Thêm khóa học mới hoặc chỉnh sửa / xóa các khóa học hiện có. Mỗi khóa học gắn với một danh mục và mức độ."}
-                    {activeMetaTab === "level" &&
-                      "Quản lý các mức độ (S, Pres, TC, MTC, ...) dùng để phân loại độ khó khóa học."}
-                  </p>
-                </div>
-                <button
-                  type="button"
-                  onClick={closeMetaPopup}
-                  className="inline-flex items-center rounded-full border border-slate-200 bg-white px-3 py-1 text-xs font-medium text-slate-600 shadow-sm transition hover:bg-slate-100 dark:border-slate-700 dark:bg-slate-900 dark:text-slate-300 dark:hover:bg-slate-800"
-                >
-                  Đóng
-                </button>
-              </div>
+        <InstructorCourseMetaModal
+          activeMetaTab={activeMetaTab}
+          show={showMetaPopup}
+          onClose={closeMetaPopup}
+          courseCategories={courseCategories}
+          categoryInput={categoryInput}
+          editingCategory={editingCategory}
+          onCategoryInputChange={setCategoryInput}
+          onSaveCategory={handleSaveCategory}
+          onStartEditCategory={handleStartEditCategory}
+          onDeleteCategory={handleDeleteCategory}
+          levelsMeta={levelsMeta}
+          levelInput={levelInput}
+          editingLevel={editingLevel}
+          onLevelInputChange={setLevelInput}
+          onSaveLevel={handleSaveLevel}
+          onStartEditLevel={handleStartEditLevel}
+          onDeleteLevel={handleDeleteLevel}
+          courses={courses}
+          courseForm={courseForm}
+          editingCourseId={editingCourseId}
+          onCourseFormChange={(
+            key: "title" | "description" | "category" | "level",
+            value: string
+          ) => handleChangeCourseForm(key, value)}
+          onSaveCourse={handleSaveCourse}
+          onStartEditCourse={handleStartEditCourse}
+          onDeleteCourse={handleDeleteCourse}
+        />
 
-              <div className="flex-1 space-y-4 overflow-y-auto px-5 py-4 md:px-6 md:py-5 text-xs">
-                {activeMetaTab === "category" && (
-                  <div className="space-y-4">
-                    <div className="flex flex-col gap-3 rounded-xl border border-dashed border-slate-200 bg-slate-50/60 p-4 dark:border-slate-700 dark:bg-slate-900/40 md:flex-row md:items-end">
-                      <div className="flex-1 space-y-1">
-                        <label className="text-xs font-medium text-slate-700 dark:text-slate-200">
-                          {editingCategory
-                            ? "Chỉnh sửa danh mục"
-                            : "Thêm danh mục mới"}
-                        </label>
-                        <input
-                          className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-xs text-slate-900 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
-                          placeholder="VD: Luyện thi, Giao tiếp, Nền tảng..."
-                          value={categoryInput}
-                          onChange={(e) => setCategoryInput(e.target.value)}
-                        />
-                      </div>
-                      <div className="flex gap-2">
-                        <button
-                          type="button"
-                          onClick={handleSaveCategory}
-                          className="rounded-md bg-slate-900 px-3 py-1.5 text-xs font-semibold text-white shadow-sm hover:bg-slate-800 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-slate-200"
-                        >
-                          {editingCategory ? "Lưu danh mục" : "Thêm danh mục"}
-                        </button>
-                        {editingCategory && (
-                          <button
-                            type="button"
-                            onClick={() => {
-                              setEditingCategory(null);
-                              setCategoryInput("");
-                            }}
-                            className="rounded-md border border-slate-300 px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-100 dark:hover:bg-slate-800"
-                          >
-                            Hủy
-                          </button>
-                        )}
-                      </div>
-                    </div>
-
-                    {courseCategories.length === 0 ? (
-                      <p className="text-xs text-slate-500 dark:text-slate-400">
-                        Chưa có danh mục nào. Hãy thêm danh mục để gán cho các
-                        khóa học.
-                      </p>
-                    ) : (
-                      <div className="flex flex-wrap gap-2 rounded-xl border border-slate-100 bg-white/70 p-3 dark:border-slate-700 dark:bg-slate-900/40">
-                        {courseCategories.map((cat) => (
-                          <div
-                            key={cat}
-                            className="flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs shadow-sm dark:border-slate-700 dark:bg-slate-900"
-                          >
-                            <span className="font-medium text-slate-700 dark:text-slate-100">
-                              {cat}
-                            </span>
-                            <button
-                              type="button"
-                              onClick={() => handleStartEditCategory(cat)}
-                              className="text-[11px] text-blue-600 hover:underline dark:text-blue-400"
-                            >
-                              Sửa
-                            </button>
-                            <button
-                              type="button"
-                              onClick={() => handleDeleteCategory(cat)}
-                              className="text-[11px] text-red-600 hover:underline dark:text-red-400"
-                            >
-                              Xóa
-                            </button>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                )}
-
-                {activeMetaTab === "course" && (
-                  <div className="space-y-4">
-                    <div className="grid gap-3 md:grid-cols-2">
-                      <div className="space-y-2">
-                        <label className="text-xs font-medium text-slate-700 dark:text-slate-200">
-                          Tên khóa học
-                        </label>
-                        <input
-                          className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-xs text-slate-900 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
-                          placeholder="VD: Luyện thi IELTS 7.0+"
-                          value={courseForm.title}
-                          onChange={(e) =>
-                            handleChangeCourseForm("title", e.target.value)
-                          }
-                        />
-                        <label className="text-xs font-medium text-slate-700 dark:text-slate-200">
-                          Mô tả ngắn
-                        </label>
-                        <textarea
-                          className="min-h-[80px] w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-xs text-slate-900 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
-                          placeholder="Mô tả ngắn gọn nội dung khóa học..."
-                          value={courseForm.description}
-                          onChange={(e) =>
-                            handleChangeCourseForm(
-                              "description",
-                              e.target.value
-                            )
-                          }
-                        />
-                      </div>
-
-                      <div className="space-y-3">
-                        <div className="space-y-1">
-                          <label className="text-xs font-medium text-slate-700 dark:text-slate-200">
-                            Danh mục khóa học
-                          </label>
-                          <select
-                            className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-xs text-slate-900 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
-                            value={courseForm.category}
-                            onChange={(e) =>
-                              handleChangeCourseForm("category", e.target.value)
-                            }
-                          >
-                            <option value="">Chưa chọn danh mục</option>
-                            {courseCategories.map((cat) => (
-                              <option key={cat} value={cat}>
-                                {cat}
-                              </option>
-                            ))}
-                          </select>
-                        </div>
-                        <div className="space-y-1">
-                          <label className="text-xs font-medium text-slate-700 dark:text-slate-200">
-                            Mức độ khóa học
-                          </label>
-                          <select
-                            className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-xs text-slate-900 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
-                            value={courseForm.level || "S"}
-                            onChange={(e) =>
-                              handleChangeCourseForm(
-                                "level",
-                                e.target.value as CourseFormState["level"]
-                              )
-                            }
-                          >
-                            {levelsMeta.map((level) => (
-                              <option key={level} value={level}>
-                                {level}
-                              </option>
-                            ))}
-                          </select>
-                        </div>
-
-                        <div className="pt-2 flex flex-wrap gap-2">
-                          <button
-                            type="button"
-                            onClick={handleSaveCourse}
-                            disabled={!courseForm.title.trim()}
-                            className="rounded-md bg-slate-900 px-3 py-1.5 text-xs font-semibold text-white shadow-sm hover:bg-slate-800 disabled:cursor-not-allowed disabled:bg-slate-400 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-slate-200"
-                          >
-                            {editingCourseId
-                              ? "Lưu thay đổi khóa học"
-                              : "Thêm khóa học"}
-                          </button>
-                          <button
-                            type="button"
-                            onClick={closeMetaPopup}
-                            className="rounded-md border border-slate-300 px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-100 dark:hover:bg-slate-800"
-                          >
-                            Hủy
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="space-y-2 border-t border-slate-200 pt-3 dark:border-slate-800">
-                      <p className="text-xs font-semibold text-slate-700 dark:text-slate-200">
-                        Danh sách khóa học hiện có
-                      </p>
-                      {courses.length === 0 ? (
-                        <p className="text-xs text-slate-500 dark:text-slate-400">
-                          Chưa có khóa học nào. Hãy thêm khóa học đầu tiên của
-                          bạn.
-                        </p>
-                      ) : (
-                        <div className="space-y-2 max-h-64 overflow-y-auto pr-1">
-                          {courses.map((course) => (
-                            <div
-                              key={course.id}
-                              className="flex items-center justify-between gap-3 rounded-md border border-slate-200 bg-white px-3 py-2 text-xs shadow-sm dark:border-slate-700 dark:bg-slate-900"
-                            >
-                              <div className="space-y-0.5">
-                                <p className="font-medium text-slate-800 dark:text-slate-100">
-                                  {course.title}
-                                </p>
-                                <p className="text-[11px] text-slate-500">
-                                  Danh mục:{" "}
-                                  {course.category ?? "Chưa có danh mục"} · Mức
-                                  độ: {course.level}
-                                </p>
-                              </div>
-                              <div className="flex items-center gap-2">
-                                <button
-                                  type="button"
-                                  onClick={() => handleStartEditCourse(course)}
-                                  className="text-[11px] font-medium text-blue-600 hover:text-blue-700 dark:text-blue-400"
-                                >
-                                  Sửa
-                                </button>
-                                <button
-                                  type="button"
-                                  onClick={() => handleDeleteCourse(course.id)}
-                                  className="text-[11px] font-medium text-red-600 hover:text-red-700 dark:text-red-400"
-                                >
-                                  Xóa
-                                </button>
-                              </div>
-                            </div>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-                )}
-
-                {activeMetaTab === "level" && (
-                  <div className="space-y-4">
-                    <div className="flex flex-col gap-3 rounded-xl border border-dashed border-slate-200 bg-slate-50/60 p-4 dark:border-slate-700 dark:bg-slate-900/40 md:flex-row md:items-end">
-                      <div className="flex-1 space-y-1">
-                        <label className="text-xs font-medium text-slate-700 dark:text-slate-200">
-                          {editingLevel
-                            ? "Chỉnh sửa mức độ"
-                            : "Thêm mức độ mới"}
-                        </label>
-                        <input
-                          className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-xs text-slate-900 shadow-sm focus:border-sky-500 focus:outline-none focus:ring-1 focus:ring-sky-500 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100"
-                          placeholder="VD: S, Pres, TC, MTC..."
-                          value={levelInput}
-                          onChange={(e) => setLevelInput(e.target.value)}
-                        />
-                      </div>
-                      <div className="flex gap-2">
-                        <button
-                          type="button"
-                          onClick={handleSaveLevel}
-                          className="rounded-md bg-slate-900 px-3 py-1.5 text-xs font-semibold text-white shadow-sm hover:bg-slate-800 dark:bg-slate-100 dark:text-slate-900 dark:hover:bg-slate-200"
-                        >
-                          {editingLevel ? "Lưu mức độ" : "Thêm mức độ"}
-                        </button>
-                        {editingLevel && (
-                          <button
-                            type="button"
-                            onClick={() => {
-                              setEditingLevel(null);
-                              setLevelInput("");
-                            }}
-                            className="rounded-md border border-slate-300 px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-50 dark:border-slate-700 dark:text-slate-100 dark:hover:bg-slate-800"
-                          >
-                            Hủy
-                          </button>
-                        )}
-                      </div>
-                    </div>
-
-                    {levelsMeta.length === 0 ? (
-                      <p className="text-xs text-slate-500 dark:text-slate-400">
-                        Chưa có mức độ nào. Hãy thêm ít nhất một mức độ để gán
-                        cho khóa học.
-                      </p>
-                    ) : (
-                      <div className="flex flex-wrap gap-2 rounded-xl border border-slate-100 bg-white/70 p-3 dark:border-slate-700 dark:bg-slate-900/40">
-                        {levelsMeta.map((level) => (
-                          <div
-                            key={level}
-                            className="flex items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3 py-1 text-xs shadow-sm dark:border-slate-700 dark:bg-slate-900"
-                          >
-                            <span className="font-medium text-slate-700 dark:text-slate-100">
-                              {level}
-                            </span>
-                            <button
-                              type="button"
-                              onClick={() => handleStartEditLevel(level)}
-                              className="text-[11px] text-blue-600 hover:underline dark:text-blue-400"
-                            >
-                              Sửa
-                            </button>
-                            <button
-                              type="button"
-                              onClick={() => handleDeleteLevel(level)}
-                              className="text-[11px] text-red-600 hover:underline dark:text-red-400"
-                            >
-                              Xóa
-                            </button>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        )}
-
-        <SectionBox title="Danh sách khóa học">
-          {filteredCourses.length === 0 ? (
-            <p className="text-sm text-slate-600 dark:text-slate-300">
-              Không tìm thấy khóa học nào phù hợp với bộ lọc hiện tại. Hãy thử
-              thay đổi từ khóa tìm kiếm hoặc điều chỉnh bộ lọc.
-            </p>
-          ) : (
-            <>
-              <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                {paginatedCourses.map((course) => (
-                  <CourseCard
-                    key={course.id}
-                    {...course}
-                    // Trong chế độ giảng viên, chúng ta không dùng progress của học viên
-                    progress={0}
-                    showInstructor={false}
-                    detailHref={`/courses-instructor/course-list/${course.id}`}
-                  />
-                ))}
-              </div>
-              <Pagination
-                page={currentPage}
-                pageCount={totalPages}
-                onPageChange={handlePageChange}
-              />
-            </>
-          )}
-        </SectionBox>
+        <InstructorCourseListSection
+          filteredCoursesCount={filteredCourses.length}
+          paginatedCourses={paginatedCourses}
+          currentPage={currentPage}
+          totalPages={totalPages}
+          onPageChange={handlePageChange}
+        />
       </div>
     </div>
   );

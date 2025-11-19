@@ -9,10 +9,10 @@ import { getStoredUser } from "@/utils/auth-utils";
 import { getCourseProgress } from "@/utils/progress-utils";
 import type { User } from "@/types/user-type";
 import type { CourseWithProgress } from "@/types/courses-dashboard-type";
-import MyCoursesHeader from "@/components/courses/my-courses/MyCoursesHeader";
-import MyCoursesEmptyState from "@/components/courses/my-courses/MyCoursesEmptyState";
-import MyCoursesInProgressSection from "@/components/courses/my-courses/MyCoursesInProgressSection";
-import MyCoursesCompletedSection from "@/components/courses/my-courses/MyCoursesCompletedSection";
+import MyCoursesHeader from "@/components/(use)/courses/my-courses/MyCoursesHeader";
+import MyCoursesEmptyState from "@/components/(use)/courses/my-courses/MyCoursesEmptyState";
+import MyCoursesInProgressSection from "@/components/(use)/courses/my-courses/MyCoursesInProgressSection";
+import MyCoursesCompletedSection from "@/components/(use)/courses/my-courses/MyCoursesCompletedSection";
 
 export default function MyCoursesPage() {
   const router = useRouter();

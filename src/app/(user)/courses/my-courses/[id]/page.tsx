@@ -9,15 +9,15 @@ import { User } from "@/types/user-type";
 import { Course } from "@/types/course-type";
 import { getCourseProgress, getLessonStatus } from "@/utils/progress-utils";
 import BackButton from "@/components/ui/BackButton";
-import CourseHero from "@/components/course-detail/CourseHero";
-import CourseStats from "@/components/course-detail/CourseStats";
-import CourseDetailRatingSection from "@/components/course-detail/CourseDetailRatingSection";
-import CourseDetailRatingSectionMobile from "@/components/course-detail/CourseDetailRatingSectionMobile";
-import LessonList from "@/components/course-detail/LessonList";
-import CourseInstructorInfo from "@/components/course-detail/CourseInstructorInfo";
-import CourseInstructorInfoMobile from "@/components/course-detail/CourseInstructorInfoMobile";
+import CourseHero from "@/components/(use)/course-detail/CourseHero";
+import CourseStats from "@/components/(use)/course-detail/CourseStats";
+import CourseDetailRatingSection from "@/components/(use)/course-detail/CourseDetailRatingSection";
+import CourseDetailRatingSectionMobile from "@/components/(use)/course-detail/CourseDetailRatingSectionMobile";
+import LessonList from "@/components/(use)/course-detail/LessonList";
+import CourseInstructorInfo from "@/components/(use)/course-detail/CourseInstructorInfo";
+import CourseInstructorInfoMobile from "@/components/(use)/course-detail/CourseInstructorInfoMobile";
 import SectionBox from "@/components/ui/SectionBox";
-import CourseCard from "@/components/courses/CourseCard";
+import CourseCard from "@/components/(use)/courses/CourseCard";
 
 export default function MyCourseDetailPage() {
   const router = useRouter();

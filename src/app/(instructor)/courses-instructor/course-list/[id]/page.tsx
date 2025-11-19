@@ -7,7 +7,7 @@ import { useParams, useRouter } from "next/navigation";
 import { getCourseById } from "@/utils/instructor-course-utils";
 import type { Lesson } from "@/types/course-type";
 import BackButton from "@/components/ui/BackButton";
-import CourseHero from "@/components/course-detail/CourseHero";
+import CourseHero from "@/components/(use)/course-detail/CourseHero";
 import SectionBox from "@/components/ui/SectionBox";
 
 export default function InstructorCourseDetailPage() {

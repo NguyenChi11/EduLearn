@@ -1,5 +1,5 @@
 import SectionBox from "@/components/ui/SectionBox";
-import CourseCard from "@/components/courses/CourseCard";
+import CourseCard from "@/components/(use)/courses/CourseCard";
 import type { CourseWithProgress } from "@/types/courses-dashboard-type";
 
 interface MyCoursesInProgressSectionProps {
@@ -36,5 +36,3 @@ export default function MyCoursesInProgressSection({
     </SectionBox>
   );
 }
-
-

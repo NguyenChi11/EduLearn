@@ -1,5 +1,5 @@
 import React from "react";
-import CourseCard from "@/components/courses/CourseCard";
+import CourseCard from "@/components/(use)/courses/CourseCard";
 import { getCourseProgress } from "@/utils/progress-utils";
 import { Course } from "@/types/course-type";
 

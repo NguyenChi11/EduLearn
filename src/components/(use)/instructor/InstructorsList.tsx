@@ -1,6 +1,6 @@
 import Card from "@/components/ui/Card";
 import type { InstructorWithStats } from "@/types/instructor-type";
-import InstructorCard from "@/components/instructor/InstructorCard";
+import InstructorCard from "@/components/(use)/instructor/InstructorCard";
 
 interface InstructorsListProps {
   instructors: InstructorWithStats[];
@@ -30,5 +30,3 @@ export default function InstructorsList({ instructors }: InstructorsListProps) {
     </div>
   );
 }
-
-

@@ -1,5 +1,5 @@
 import { MOCK_COURSES } from "@/data/mock-data";
-import CourseCard from "@/components/courses/CourseCard";
+import CourseCard from "@/components/(use)/courses/CourseCard";
 import Typography from "@/components/ui/Typography";
 
 export default function HomeCoursesSection() {
@@ -25,7 +25,11 @@ export default function HomeCoursesSection() {
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {highlightedCourses.map((course) => (
-          <CourseCard key={course.id} {...course} />
+          <CourseCard
+            key={course.id}
+            {...course}
+            detailHref={`/courses/my-courses/${course.id}`}
+          />
         ))}
       </div>
     </section>

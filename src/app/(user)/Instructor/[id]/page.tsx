@@ -10,7 +10,7 @@ import { MOCK_COURSES } from "@/data/mock-data";
 import Card from "@/components/ui/Card";
 import Typography from "@/components/ui/Typography";
 import Button from "@/components/ui/Button";
-import CourseCard from "@/components/courses/CourseCard";
+import CourseCard from "@/components/(use)/courses/CourseCard";
 import BackButton from "@/components/ui/BackButton";
 
 export default function InstructorDetailPage() {

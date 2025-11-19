@@ -1,5 +1,5 @@
 import React from "react";
-import LessonCard from "@/components/lesson-detail/LessonCard";
+import LessonCard from "@/components/(use)/course-detail/lesson-detail/LessonCard";
 import { getLessonStatus } from "@/utils/progress-utils";
 import { Lesson } from "@/types/course-type";
 

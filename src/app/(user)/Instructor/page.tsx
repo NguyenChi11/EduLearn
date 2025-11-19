@@ -4,9 +4,9 @@ import { useMemo, useState, useCallback } from "react";
 
 import { INSTRUCTORS } from "@/data/instructors-data";
 import { MOCK_COURSES } from "@/data/mock-data";
-import InstructorsHeader from "@/components/instructor/InstructorsHeader";
-import InstructorsFilterBar from "@/components/instructor/InstructorsFilterBar";
-import InstructorsList from "@/components/instructor/InstructorsList";
+import InstructorsHeader from "@/components/(use)/instructor/InstructorsHeader";
+import InstructorsFilterBar from "@/components/(use)/instructor/InstructorsFilterBar";
+import InstructorsList from "@/components/(use)/instructor/InstructorsList";
 import type {
   InstructorSortOption,
   InstructorWithStats,

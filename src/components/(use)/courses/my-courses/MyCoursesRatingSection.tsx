@@ -5,10 +5,7 @@ import SectionBox from "@/components/ui/SectionBox";
 import Typography from "@/components/ui/Typography";
 import { cn } from "@/lib/utils";
 import type { CourseWithProgress } from "@/types/courses-dashboard-type";
-import {
-  getAllCourseRatings,
-  setUserCourseRating,
-} from "@/utils/rating-utils";
+import { getAllCourseRatings, setUserCourseRating } from "@/utils/rating-utils";
 
 interface MyCoursesRatingSectionProps {
   completedCourses: CourseWithProgress[];
@@ -23,6 +20,7 @@ export default function MyCoursesRatingSection({
 
   useEffect(() => {
     if (!userId) return;
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setRatings(getAllCourseRatings(userId));
   }, [userId]);
 
@@ -102,5 +100,3 @@ export default function MyCoursesRatingSection({
     </SectionBox>
   );
 }
-
-

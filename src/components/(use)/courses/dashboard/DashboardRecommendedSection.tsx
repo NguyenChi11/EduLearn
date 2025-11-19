@@ -1,7 +1,7 @@
 import Link from "next/link";
 
 import SectionBox from "@/components/ui/SectionBox";
-import CourseCard from "@/components/courses/CourseCard";
+import CourseCard from "@/components/(use)/courses/CourseCard";
 import type { Course } from "@/types/course-type";
 
 interface DashboardRecommendedSectionProps {

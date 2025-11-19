@@ -1,7 +1,7 @@
 "use client";
 
-import { UserAuthGuard } from "@/components/user";
-import UserPageLayout from "@/components/user/UserPageLayout";
+import { UserAuthGuard } from "@/components/(use)/user";
+import UserPageLayout from "@/components/(use)/user/UserPageLayout";
 
 export default function UserPage() {
   return (
